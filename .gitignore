@@ -1,0 +1,11 @@
+wa
+wa.exe
+
+*.exe
+*.dll
+*.a
+*.so
+*.dylib
+
+*.out*
+_target
