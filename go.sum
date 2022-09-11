@@ -1,2 +1,4 @@
-github.com/wa-lang/wa v0.2.1-0.20220909134301-cd93b7771a6f h1:ewDQr1HLs96jv6SmicstGLpdg0vV/HgNYgxkSWrukBM=
-github.com/wa-lang/wa v0.2.1-0.20220909134301-cd93b7771a6f/go.mod h1:VPdf67SCYV69d7am+wo+FFqGygqDGoucbZNYLNrlyIs=
+github.com/tetratelabs/wazero v1.0.0-pre.1/go.mod h1:M8UDNECGm/HVjOfq0EOe4QfCY9Les1eq54IChMLETbc=
+github.com/wa-lang/wa v0.2.1-dev2 h1:dt1bIn0a+ZbbD8Fs7J3ApBGfKWhXjIjoCHnDISzx5gE=
+github.com/wa-lang/wa v0.2.1-dev2/go.mod h1:VPdf67SCYV69d7am+wo+FFqGygqDGoucbZNYLNrlyIs=
+github.com/wa-lang/wabt-go v1.1.0/go.mod h1:I/qIi3rHMN4ECgmZ8FzYwpNr2KfLs4TiXuTi7Ql7H3g=

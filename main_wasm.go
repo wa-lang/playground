@@ -15,7 +15,7 @@ func main() {
 
 	data := js.Global().Get("document").Call("getElementById", "data")
 
-	wat, err := api.BuildFile("hello.wa", code)
+	wat, err := api.BuildFile("hello.wa", code, "wasm32-wa")
 	if err != nil {
 		data.Set("innerHTML", "ERROR: "+err.Error())
 	} else {
