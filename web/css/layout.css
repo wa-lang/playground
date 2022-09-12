@@ -176,6 +176,15 @@ a {
 }
 
 .code-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.code-files {
+  flex: 1;
   background: var(--theme-foreground);
   border-radius: 4px;
   margin: 8px;
@@ -183,10 +192,10 @@ a {
   flex-direction: row;
   align-items: center;
   flex-shrink: 0;
-
+  display: flex;
 }
 
-.code-header span {
+.code-files span {
   cursor: pointer;
   margin: 6px;
   background: var(--theme-background);
@@ -196,13 +205,22 @@ a {
   outline: 1.5px solid #21B2AA;
 }
 
-.code-header svg {
+.code-files svg {
   display: block;
   color: var(--theme-color);
   cursor: pointer;
   padding: 8px;
 }
 
+#wa-compile {
+  flex-shrink: 0;
+  padding: 5px;
+  outline: 1.5px solid var(--theme-color);
+  border-radius: 4px;
+  margin: 0 8px;
+  color: var(--theme-color);
+  cursor: pointer;
+}
 
 #wa-editor {
   flex: 1;

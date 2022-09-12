@@ -7,24 +7,14 @@ import (
 )
 
 func main() {
-	document := js.Global().Get("document")
+	window := js.Global().Get("window")
+	waCode := window.Get("waCode").String()
 
-	p := document.Call("createElement", "div")
-	p.Set("id", "data")
-	document.Get("body").Call("appendChild", p)
-
-	data := js.Global().Get("document").Call("getElementById", "data")
-
-	wat, err := api.BuildFile("hello.wa", code, "wasm32-wa")
+	wat, err := api.BuildFile("hello.wa", waCode, "wasm32-wa")
 	if err != nil {
-		data.Set("innerHTML", "ERROR: "+err.Error())
+		window.Set("waWat", nil)
 	} else {
-		data.Set("innerHTML", "<pre>"+string(wat)+"</pre>")
+		window.Set("waWat", string(wat))
 	}
-}
 
-const code = `
-fn main() {
-	println(40+2)
 }
-`

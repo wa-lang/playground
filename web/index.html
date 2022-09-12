@@ -71,10 +71,13 @@
       <div class="split-horizontal">
         <div id="split-code">
           <div class="code-header">
-            <span>Hello.wa</span>
-            <svg width="20" height="20" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6Z" />
-            </svg>
+            <div class="code-files">
+              <span>Hello.wa</span>
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6Z" />
+              </svg>
+            </div>
+            <div id="wa-compile" onclick="wa2wat()">Compile</div>
           </div>
           <div id="wa-editor" style="height: 100%"></div>
         </div>
@@ -82,7 +85,7 @@
           <div class="split-vertical">
             <div id="split-js">
               <div class="js-header">
-                <span>JAVASCRIPT</span>
+                <span>JavaScript</span>
                 <svg width="20" height="20" viewBox="0 0 16 16">
                   <path fill="currentColor"
                     d="m1.8 1.01l-.78.41v12l.78.42l9-6v-.83l-9-6zm.22 11.48V2.36l7.6 5.07l-7.6 5.06zM12.85 15h-.71l-2.5-2.5l.71-.71L12 13.44V8h1v5.45l1.65-1.65l.71.71L12.85 15z" />
@@ -96,7 +99,7 @@
                   <path fill="currentColor"
                     d="M13 19v-3h8v3h-8m-4.5-6L2.47 7h4.24l4.96 4.95c.58.59.58 1.55 0 2.12L6.74 19H2.5l6-6Z" />
                 </svg>
-                <span>OUTPUT</span>
+                <span>Output</span>
               </div>
               <div id="wa-output">
                 <pre><code id="wa-output-code"></code></pre>
@@ -115,6 +118,10 @@
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/mode/go/go.js"></script>
     <script src="./js/layout.js"></script>
     <script src="./js/editor.js"></script>
+    <script src="./js/wasm_exec.js"></script>
+    <script src="./js/init_wasm.js"></script>
+    <script src="./js/libwabt.js"></script>
+    <script src="./js/parse_wa_wat.js"></script>
     <script>
       function updateTheme() {
         const isDark = document.body.classList.contains('dark-theme')
