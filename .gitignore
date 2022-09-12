@@ -7,5 +7,4 @@ wa.exe
 *.so
 *.dylib
 
-*.out*
 _target
