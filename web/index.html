@@ -113,41 +113,14 @@
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/mode/javascript/javascript.js"></script>
     <!-- Temporarily use Golang highlight -->
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/mode/go/go.js"></script>
+    <script src="./js/layout.js"></script>
+    <script src="./js/editor.js"></script>
     <script>
       function updateTheme() {
         const isDark = document.body.classList.contains('dark-theme')
         const mode = isDark ? 'remove' : 'toggle'
         document.body.classList[mode]('dark-theme')
       }
-
-      (() => {
-        Split(['#split-code', '#split-console'], {
-          sizes: [60, 40],
-          gutterSize: 13,
-          gutterAlign: 'start'
-        })
-
-        Split(['#split-js', '#split-output'], {
-          direction: 'vertical',
-          sizes: [60, 40],
-          gutterSize: 13,
-          gutterAlign: 'start',
-        })
-
-        var waEditor = CodeMirror(document.getElementById('wa-editor'), {
-          mode: 'go',
-          lineNumbers: true,
-          tabSize: 2,
-        });
-
-        var jsEditor = CodeMirror(document.getElementById('js-editor'), {
-          value: "",
-          mode: "javascript",
-          lineNumbers: true,
-          tabSize: 2,
-          styleActiveLine: true,
-        });
-      })()
     </script>
 </body>
 
