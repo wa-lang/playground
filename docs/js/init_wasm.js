@@ -8,7 +8,7 @@ if (!WebAssembly.instantiateStreaming) {
 const go = new Go();
 let wasmMod, wasmInst;
 
-WebAssembly.instantiateStreaming(fetch("/playground/wa.out.wasm"), go.importObject).then((result) => {
+WebAssembly.instantiateStreaming(fetch("../assets/wa.out.wasm"), go.importObject).then((result) => {
   wasmMod = result.module;
   wasmInst = result.instance;
   wa2wat()

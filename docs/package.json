@@ -1,0 +1,14 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "The Wa Playground",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env GOOS=js GOARCH=wasm go build -o assets/wa.out.wasm ../main.go"
+  },
+  "author": "xxxDeveloper",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
