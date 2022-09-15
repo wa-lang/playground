@@ -19,3 +19,82 @@ body.dark-theme {
   --theme-color-hover: rgba(255, 255, 255, .5);
   --theme-box-shadow: rgb(0 0 0 / 84%);
 }
+
+/*****************************************
+*                                        *
+*               CodeMirror               *
+*                                        *
+*****************************************/
+.cm-s-wa .CodeMirror-guttermarker {
+	color: #ac4142;
+}
+
+.cm-s-wa .CodeMirror-guttermarker-subtle {
+	color: #505050;
+}
+
+.cm-s-wa .CodeMirror-linenumber {
+	color: #505050;
+}
+
+.cm-s-wa .CodeMirror-cursor {
+	border-left: 1px solid #bfbaaa;
+}
+
+.cm-s-wa span.cm-comment {
+	color: #758575dd;
+}
+
+.cm-s-wa span.cm-atom {
+	color: #4d9375;
+}
+
+.cm-s-wa span.cm-number {
+	color: #4C9A91; 
+}
+
+.cm-s-wa span.cm-property, .cm-s-wa span.cm-attribute {
+	color: #b8a965;
+}
+
+.cm-s-wa span.cm-keyword {
+	color: #4d9375;
+}
+
+.cm-s-wa span.cm-string {
+	color: #c98a7d;
+}
+
+.cm-s-wa span.cm-variable {
+	color: #db889a;
+}
+
+.cm-s-wa span.cm-variable-2 {
+	color: #6a9fb5;
+}
+
+.cm-s-wa span.cm-def {
+	color: #d28445;
+}
+
+.cm-s-wa span.cm-bracket {
+	color: #666666; 
+}
+
+.cm-s-wa span.cm-tag {
+	color: #4d9375;
+}
+
+.cm-s-wa span.cm-link {
+	color: #c98a7d;
+}
+
+.cm-s-wa span.cm-error {
+	background: #fdaeb7;
+	color: #b0b0b0;
+}
+
+.cm-s-wa .CodeMirror-matchingbracket {
+	text-decoration: underline;
+	color: #666666 !important;
+}
