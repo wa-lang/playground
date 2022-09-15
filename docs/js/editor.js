@@ -1,19 +1,21 @@
 (() => {
   var waEditor = CodeMirror(document.getElementById('wa-editor'), {
-    mode: 'go',
+    mode: 'wa',
     lineNumbers: true,
     tabSize: 2,
+    theme: "wa",
   });
 
   var jsEditor = CodeMirror(document.getElementById('js-editor'), {
-    value: "",
     mode: "javascript",
     lineNumbers: true,
     tabSize: 2,
     styleActiveLine: true,
+    theme: "wa",
   });
 
-  waEditor.setValue(`
+  waEditor.setValue(`# 版权 @2019 凹语言 作者。保留所有权利。
+
 fn main() {
   a := 0.0
   for y := 1.5; y > -1.5; y = y - 0.1 {

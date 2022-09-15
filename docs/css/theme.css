@@ -45,6 +45,10 @@ body.dark-theme {
 	color: #758575dd;
 }
 
+.cm-s-wa span.cm-operator {
+	color: #666666;
+}
+
 .cm-s-wa span.cm-atom {
 	color: #4d9375;
 }
