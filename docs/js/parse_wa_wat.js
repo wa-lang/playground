@@ -60,7 +60,7 @@ async function parseWaWat() {
       const { main } = wasmInst.exports;
       main()
     } catch (e) {
-      console.log(e.toString());
+      waPrint = e.toString()
     }
   }
 

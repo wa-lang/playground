@@ -233,7 +233,7 @@ a {
 *               JavaScript               *
 *                                        *
 *****************************************/
-#split-js {
+/* #split-js {
   width: 100%;
   height: 100%;
   display: flex;
@@ -281,7 +281,7 @@ a {
   flex: 1;
   overflow: auto;
   background: var(--theme-foreground);
-}
+} */
 
 /*****************************************
 *                                        *
