@@ -1,7 +1,5 @@
 window.onload = function () {
   document.querySelector('.wa-loading').style.display = 'none';
-  const waOutputCode = document.getElementById('wa-output-code')
-  waOutputCode.innerHTML = "loading wa..."
 };
 
 function updateTheme() {

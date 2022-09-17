@@ -25,7 +25,8 @@ a {
   z-index: 9;
 }
 
-.wa-loading-content {
+.wa-loading-content,
+.wa-output-loading  {
   position: absolute;
   top: 20%;
   left: 50%;
@@ -35,12 +36,14 @@ a {
   align-items: center;
   justify-content: center;
 }
-.wa-loading-content svg {
+.wa-loading-content img,
+.wa-output-loading img {
   width: 100px;
   height: 100px;
 }
 
-.wa-loading-content span {
+.wa-loading-content span,
+.wa-output-loading span {
   margin-top: 10px;
   font-size: 16px;
   color: #21B2AA;
@@ -369,6 +372,7 @@ a {
   border-radius: 10px;
   border-top-left-radius: 0px;
   background: var(--theme-foreground);
+  position: relative;
 }
 
 #wa-output pre {

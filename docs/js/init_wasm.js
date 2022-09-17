@@ -11,6 +11,7 @@ let wasmMod, wasmInst;
 WebAssembly.instantiateStreaming(fetch("assets/wa.out.wasm"), go.importObject).then((result) => {
   wasmMod = result.module;
   wasmInst = result.instance;
+  document.querySelector('.wa-output-loading').style.display = 'none'
   wa2wat()
 }).catch((err) => {
   console.error(err);
