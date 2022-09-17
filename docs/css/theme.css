@@ -114,7 +114,7 @@ body.dark-theme {
 }
 
 .CodeMirror-gutters {
-  border-right: 1px solid var(--theme-handle-background) !important
+  border-right: 0.5px solid var(--theme-handle-background) !important
 }
 
 #wa-editor div.CodeMirror-selected {

@@ -1,3 +1,9 @@
+window.onload = function () {
+  document.querySelector('.wa-loading').style.display = 'none';
+  const waOutputCode = document.getElementById('wa-output-code')
+  waOutputCode.innerHTML = "loading wa..."
+};
+
 function updateTheme() {
   const lightIcon = `<svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
     <path fill="currentColor"
@@ -14,8 +20,6 @@ function updateTheme() {
   document.body.classList[mode]('dark-theme')
   iconDom.innerHTML = isDark ? lightIcon : nightIcon
 }
-
-
 
 (() => {
   Split(['#split-code', '#split-output'], {
