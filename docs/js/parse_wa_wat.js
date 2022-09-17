@@ -67,6 +67,12 @@ async function parseWaWat() {
   const binary = waCompile();
   run(binary);
 
+  window['waPrint'] = waPrint
+
+  const outActiveDom = document.querySelector('.output-active')
+  const outIndex = Array.prototype.indexOf.call(outActiveDom.parentNode.children, outActiveDom)
+  const outInnerHTML = outIndex === 0 ? 'waPrint' : 'waWat'
   const waOutputCode = document.getElementById('wa-output-code')
-  waOutputCode.innerHTML = waPrint
+  waOutputCode.innerHTML = window[outInnerHTML] ?? 'ReferenceError: parseWat failed'
+
 }

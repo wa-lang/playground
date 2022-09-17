@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" size="16x16" href="assets/logo.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/lib/codemirror.css">
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/lib/codemirror.css">
   <title>The Wa Playground</title>
 </head>
 
@@ -32,7 +32,7 @@
               <a href="https://github.com/wa-lang/wa"><span>WIP</span></a>
             </li>
             <li>
-              <a href="#" class="wa-theme-icon" onclick="updateTheme()">
+              <a class="wa-theme-icon" onclick="updateTheme()">
                 <svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
                   <path fill="currentColor"
                     d="M12 15q1.25 0 2.125-.875T15 12q0-1.25-.875-2.125T12 9q-1.25 0-2.125.875T9 12q0 1.25.875 2.125T12 15Zm0 2q-2.075 0-3.537-1.463Q7 14.075 7 12t1.463-3.538Q9.925 7 12 7t3.538 1.462Q17 9.925 17 12q0 2.075-1.462 3.537Q14.075 17 12 17ZM2 13q-.425 0-.712-.288Q1 12.425 1 12t.288-.713Q1.575 11 2 11h2q.425 0 .713.287Q5 11.575 5 12t-.287.712Q4.425 13 4 13Zm18 0q-.425 0-.712-.288Q19 12.425 19 12t.288-.713Q19.575 11 20 11h2q.425 0 .712.287q.288.288.288.713t-.288.712Q22.425 13 22 13Zm-8-8q-.425 0-.712-.288Q11 4.425 11 4V2q0-.425.288-.713Q11.575 1 12 1t.713.287Q13 1.575 13 2v2q0 .425-.287.712Q12.425 5 12 5Zm0 18q-.425 0-.712-.288Q11 22.425 11 22v-2q0-.425.288-.712Q11.575 19 12 19t.713.288Q13 19.575 13 20v2q0 .425-.287.712Q12.425 23 12 23ZM5.65 7.05L4.575 6q-.3-.275-.288-.7q.013-.425.288-.725q.3-.3.725-.3t.7.3L7.05 5.65q.275.3.275.7q0 .4-.275.7q-.275.3-.687.287q-.413-.012-.713-.287ZM18 19.425l-1.05-1.075q-.275-.3-.275-.712q0-.413.275-.688q.275-.3.688-.287q.412.012.712.287L19.425 18q.3.275.288.7q-.013.425-.288.725q-.3.3-.725.3t-.7-.3ZM16.95 7.05q-.3-.275-.287-.688q.012-.412.287-.712L18 4.575q.275-.3.7-.288q.425.013.725.288q.3.3.3.725t-.3.7L18.35 7.05q-.3.275-.7.275q-.4 0-.7-.275ZM4.575 19.425q-.3-.3-.3-.725t.3-.7l1.075-1.05q.3-.275.713-.275q.412 0 .687.275q.3.275.288.688q-.013.412-.288.712L6 19.425q-.275.3-.7.287q-.425-.012-.725-.287ZM12 12Z" />
@@ -40,17 +40,11 @@
               </a>
             </li>
             <li>
-              <a href="#">
-                <svg width="1.7em" height="1.7em" viewBox="0 0 24 24" fill="currentColor">
-                  <g>
-                    <rect x="4" y="18" width="16" height="2" rx="1" ry="1"></rect>
-                    <rect x="3" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 5 18)"></rect>
-                    <rect x="17" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 19 18)"></rect>
-                    <path
-                      d="M12 15a1 1 0 0 1-.58-.18l-4-2.82a1 1 0 0 1-.24-1.39a1 1 0 0 1 1.4-.24L12 12.76l3.4-2.56a1 1 0 0 1 1.2 1.6l-4 3a1 1 0 0 1-.6.2z">
-                    </path>
-                    <path d="M12 13a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0v8a1 1 0 0 1-1 1z"></path>
-                  </g>
+              <a href="https://wa-lang.org/">
+                <svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
+                  <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M20 19v-8.5a1 1 0 0 0-.4-.8l-7-5.25a1 1 0 0 0-1.2 0l-7 5.25a1 1 0 0 0-.4.8V19a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1z" />
                 </svg>
               </a>
             </li>
@@ -68,43 +62,67 @@
     </div>
 
     <div id="wa-main">
-      <div class="split-horizontal">
+      <div class="split">
         <div id="split-code">
           <div class="code-header">
-            <div class="code-files">
-              <span>Hello.wa</span>
-              <svg width="20" height="20" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6Z" />
+            <div id="wa-codes">
+              <span class="code-active">Hello.wa</span>
+              <!-- <span>Heart.wa</span> -->
+              <!-- <span>Prime.wa</span> -->
+            </div>
+            <div id="wa-compile" onclick="wa2wat()">
+              <span>COMPILE</span>
+              <svg width="1.3em" height="1.3em" viewBox="0 0 16 16">
+                <path fill="currentColor"
+                  d="m1.8 1.01l-.78.41v12l.78.42l9-6v-.83l-9-6zm.22 11.48V2.36l7.6 5.07l-7.6 5.06zM12.85 15h-.71l-2.5-2.5l.71-.71L12 13.44V8h1v5.45l1.65-1.65l.71.71L12.85 15z" />
               </svg>
             </div>
-            <div id="wa-compile" onclick="wa2wat()">Compile</div>
           </div>
           <div id="wa-editor" style="height: 100%"></div>
         </div>
-        <div id="split-console">
-          <div class="split-vertical">
-            <!-- <div id="split-js">
-              <div class="js-header">
-                <span>JavaScript</span>
-                <svg width="20" height="20" viewBox="0 0 16 16">
-                  <path fill="currentColor"
-                    d="m1.8 1.01l-.78.41v12l.78.42l9-6v-.83l-9-6zm.22 11.48V2.36l7.6 5.07l-7.6 5.06zM12.85 15h-.71l-2.5-2.5l.71-.71L12 13.44V8h1v5.45l1.65-1.65l.71.71L12.85 15z" />
+        <div id="split-output">
+          <div class="output-nav">
+            <div class="output-nav-inner">
+              <span>
+                <svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
+                  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                    <path d="m8 9l3 3l-3 3m5 0h3" />
+                    <rect width="18" height="16" x="3" y="4" rx="2" />
+                  </g>
                 </svg>
-              </div>
-              <div id="js-editor" style="height: 100%"></div>
-            </div> -->
-            <div id="split-output">
-              <div class="output-header">
-                <svg width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="currentColor"
-                    d="M13 19v-3h8v3h-8m-4.5-6L2.47 7h4.24l4.96 4.95c.58.59.58 1.55 0 2.12L6.74 19H2.5l6-6Z" />
+                OUTPUT
+              </span>
+              <span>
+                <svg width="1.7em" height="1.7em" viewBox="0 0 48 48">
+                  <mask id="svgIDa">
+                    <g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4">
+                      <rect width="36" height="36" x="6" y="6" fill="none" rx="3" />
+                      <path stroke-linecap="round" d="M16 19v-3h16v3M22 34h4m-2-16v16" />
+                    </g>
+                  </mask>
+                  <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#svgIDa)" />
                 </svg>
-                <span>Output</span>
-              </div>
-              <div id="wa-output">
-                <pre><code id="wa-output-code"></code></pre>
-              </div>
+                WAT
+              </span>
             </div>
+            <div class="output-operate">
+              <a href="https://wa-lang.org/playground/assets/wa.out.wasm">
+                <svg width="1.7em" height="1.7em" viewBox="0 0 24 24" fill="currentColor">
+                  <g>
+                    <rect x="4" y="18" width="16" height="2" rx="1" ry="1"></rect>
+                    <rect x="3" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 5 18)"></rect>
+                    <rect x="17" y="17" width="4" height="2" rx="1" ry="1" transform="rotate(-90 19 18)"></rect>
+                    <path
+                      d="M12 15a1 1 0 0 1-.58-.18l-4-2.82a1 1 0 0 1-.24-1.39a1 1 0 0 1 1.4-.24L12 12.76l3.4-2.56a1 1 0 0 1 1.2 1.6l-4 3a1 1 0 0 1-.6.2z">
+                    </path>
+                    <path d="M12 13a1 1 0 0 1-1-1V4a1 1 0 0 1 2 0v8a1 1 0 0 1-1 1z"></path>
+                  </g>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div id="wa-output">
+            <pre><code id="wa-output-code"></code></pre>
           </div>
         </div>
       </div>
@@ -114,31 +132,13 @@
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/lib/codemirror.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/addon/mode/simple.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/mode/javascript/javascript.js"></script>
-    <script src="js/wa_mode.js"></script>
     <script src="js/layout.js"></script>
+    <script src="js/wa_mode.js"></script>
     <script src="js/editor.js"></script>
     <script src="js/wasm_exec.js"></script>
     <script src="js/init_wasm.js"></script>
     <script src="js/libwabt.js"></script>
     <script src="js/parse_wa_wat.js"></script>
-    <script>
-      // 临时处理
-      const lightIcon = `<svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
-        <path fill="currentColor"
-          d="M12 15q1.25 0 2.125-.875T15 12q0-1.25-.875-2.125T12 9q-1.25 0-2.125.875T9 12q0 1.25.875 2.125T12 15Zm0 2q-2.075 0-3.537-1.463Q7 14.075 7 12t1.463-3.538Q9.925 7 12 7t3.538 1.462Q17 9.925 17 12q0 2.075-1.462 3.537Q14.075 17 12 17ZM2 13q-.425 0-.712-.288Q1 12.425 1 12t.288-.713Q1.575 11 2 11h2q.425 0 .713.287Q5 11.575 5 12t-.287.712Q4.425 13 4 13Zm18 0q-.425 0-.712-.288Q19 12.425 19 12t.288-.713Q19.575 11 20 11h2q.425 0 .712.287q.288.288.288.713t-.288.712Q22.425 13 22 13Zm-8-8q-.425 0-.712-.288Q11 4.425 11 4V2q0-.425.288-.713Q11.575 1 12 1t.713.287Q13 1.575 13 2v2q0 .425-.287.712Q12.425 5 12 5Zm0 18q-.425 0-.712-.288Q11 22.425 11 22v-2q0-.425.288-.712Q11.575 19 12 19t.713.288Q13 19.575 13 20v2q0 .425-.287.712Q12.425 23 12 23ZM5.65 7.05L4.575 6q-.3-.275-.288-.7q.013-.425.288-.725q.3-.3.725-.3t.7.3L7.05 5.65q.275.3.275.7q0 .4-.275.7q-.275.3-.687.287q-.413-.012-.713-.287ZM18 19.425l-1.05-1.075q-.275-.3-.275-.712q0-.413.275-.688q.275-.3.688-.287q.412.012.712.287L19.425 18q.3.275.288.7q-.013.425-.288.725q-.3.3-.725.3t-.7-.3ZM16.95 7.05q-.3-.275-.287-.688q.012-.412.287-.712L18 4.575q.275-.3.7-.288q.425.013.725.288q.3.3.3.725t-.3.7L18.35 7.05q-.3.275-.7.275q-.4 0-.7-.275ZM4.575 19.425q-.3-.3-.3-.725t.3-.7l1.075-1.05q.3-.275.713-.275q.412 0 .687.275q.3.275.288.688q-.013.412-.288.712L6 19.425q-.275.3-.7.287q-.425-.012-.725-.287ZM12 12Z" />
-      </svg>`
-      const nightIcon = `<svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
-        <path fill="currentColor"
-          d="M9.5 4h-.525q-.25 0-.475.05q1.425 1.65 2.213 3.687Q11.5 9.775 11.5 12t-.787 4.262Q9.925 18.3 8.5 19.95q.225.05.475.05H9.5q3.325 0 5.663-2.337Q17.5 15.325 17.5 12t-2.337-5.663Q12.825 4 9.5 4Zm10 8q0 2.075-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q11.575 22 9.5 22q-.8 0-1.675-.15t-1.675-.425q-.3-.125-.475-.387q-.175-.263-.175-.588q0-.225.088-.425q.087-.2.262-.325q1.775-1.475 2.712-3.488Q9.5 14.2 9.5 12q0-2.2-.938-4.213Q7.625 5.775 5.85 4.3q-.175-.125-.262-.325q-.088-.2-.088-.425q0-.325.175-.588q.175-.262.475-.387q.8-.275 1.675-.425Q8.7 2 9.5 2q2.075 0 3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175q.788 1.825.788 3.9Zm-8 0Z" />
-      </svg>`
-      function updateTheme() {
-        const iconDom = document.querySelector('.wa-theme-icon')
-        const isDark = document.body.classList.contains('dark-theme')
-        const mode = isDark ? 'remove' : 'toggle'
-        document.body.classList[mode]('dark-theme')
-        iconDom.innerHTML = isDark ? lightIcon : nightIcon
-      }
-    </script>
 </body>
 
 </html>

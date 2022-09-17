@@ -6,14 +6,6 @@
     theme: "wa",
   });
 
-  var jsEditor = CodeMirror(document.getElementById('js-editor'), {
-    mode: "javascript",
-    lineNumbers: true,
-    tabSize: 2,
-    styleActiveLine: true,
-    theme: "wa",
-  });
-
   waEditor.setValue(`# 版权 @2019 凹语言 作者。保留所有权利。
 
 fn main() {
@@ -35,6 +27,4 @@ fn main() {
   waEditor.on('change', (cm, change) => {
     window['waCode'] = cm.getValue()
   })
-
-  jsEditor.setValue(`敬请期待~`)
 })()

@@ -1,8 +1,8 @@
 :root {
   --theme-background: #FFFFFF;
-  --theme-foreground: #FAFAFA;
-  --theme-gutter-background: #F7F8F9;
-  --theme-handle-background: rgba(100, 116, 139, .2);
+  --theme-foreground: #F9F9F9;
+  --theme-gutter-background: #F9F9F9;
+  --theme-handle-background: #DADDE3;
   --theme-selection-background: #E6E6E6;
   --theme-color: rgb(33, 53, 71);
   --theme-color-hover: rgb(33, 53, 71, .5);
@@ -10,10 +10,10 @@
 }
 
 body.dark-theme {
-  --theme-background: #1A1A1A;
-  --theme-foreground: #242424;
-  --theme-gutter-background: #242424;
-  --theme-handle-background: rgba(100, 116, 139, .3);
+  --theme-background: #242424;
+  --theme-foreground: #2F2F2F;
+  --theme-gutter-background: #2F2F2F;
+  --theme-handle-background: #373C43;
   --theme-selection-background: #3A3A3A;
   --theme-color: rgba(255, 255, 255, .87);
   --theme-color-hover: rgba(255, 255, 255, .5);
@@ -101,4 +101,26 @@ body.dark-theme {
 .cm-s-wa .CodeMirror-matchingbracket {
 	text-decoration: underline;
 	color: #666666 !important;
+}
+
+#wa-editor .CodeMirror {
+  height: 100%;
+  background: var(--theme-background);
+  color: var(--theme-color);
+}
+
+.CodeMirror-gutter {
+  background: var(--theme-background);
+}
+
+.CodeMirror-gutters {
+  border-right: 1px solid var(--theme-handle-background) !important
+}
+
+#wa-editor div.CodeMirror-selected {
+  background: var(--theme-selection-background);
+}
+
+#wa-editor div.CodeMirror-activeline-background {
+  background: var(--theme-selection-background)
 }
