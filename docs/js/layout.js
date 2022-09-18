@@ -43,7 +43,8 @@ function updateThemeContent(theme) {
       let outputActiveDom = document.querySelector('.output-active')
       outputActiveDom.classList.remove('output-active')
       this.classList.add('output-active')
-      waOutputCode.innerHTML = window[curKey] ?? 'ReferenceError: parseWat failed'
+      const isError = window[curKey].includes('TypeError: WebAssembly.Module()')
+      waOutputCode.innerHTML = window[isError ? 'waWat' : curKey]
     }
   }
 })()

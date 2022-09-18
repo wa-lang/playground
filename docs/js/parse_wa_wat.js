@@ -73,6 +73,6 @@ async function parseWaWat() {
   const outIndex = Array.prototype.indexOf.call(outActiveDom.parentNode.children, outActiveDom)
   const outInnerHTML = outIndex === 0 ? 'waPrint' : 'waWat'
   const waOutputCode = document.getElementById('wa-output-code')
-  waOutputCode.innerHTML = window[outInnerHTML] ?? 'ReferenceError: parseWat failed'
-
+  const isError = window[outInnerHTML].includes('TypeError: WebAssembly.Module()')
+  waOutputCode.innerHTML = window[isError ? 'waWat' : outInnerHTML]
 }

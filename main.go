@@ -12,7 +12,7 @@ func main() {
 
 	wat, err := api.BuildFile("hello.wa", waCode, "wasm32-wa")
 	if err != nil {
-		window.Set("waWat", nil)
+		window.Set("waWat", err.Error())
 	} else {
 		window.Set("waWat", string(wat))
 	}
