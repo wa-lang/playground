@@ -28,8 +28,15 @@ function updateThemeContent(theme) {
 }
 
 (() => {
+  const layoutMode = isMobile()
+  const direction = layoutMode ? "vertical" : 'horizontal'
+  const flexDirection = layoutMode ? "column" : "row"
+
+  const splitDom = document.querySelector('.split')
+  splitDom.style.flexDirection = flexDirection
+
   Split(['#split-code', '#split-output'], {
-    direction: 'horizontal',
+    direction: direction,
     gutterSize: 13,
     gutterAlign: 'start'
   })
