@@ -16,7 +16,7 @@ async function parseWaWat() {
   const wabt = await WabtModule();
   let waPrint = ""
 
-  let importsObject = {
+  const importsObject = {
     wa_js_env: new function () {
       this.waPrintI32 = (i) => {
         waPrint += i

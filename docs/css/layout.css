@@ -229,31 +229,28 @@ a {
 }
 
 #wa-codes span {
-  /* --s: 1.5px;
+  --s: 1.5px;
   --c: #21B2AA;
   background: 
      linear-gradient(var(--c) 0 0) no-repeat
      calc(var(--_p, 0%) - 10%) 100% / calc(var(--_p, 0%)) var(--s);
-  transition: .2s, background-position .3s .2s; */
-  background: rgba(33, 178, 170, 0.2);
-  font-weight: 500;
-  color: #21B2AA;
+  transition: .2s, background-position .3s .2s;
+  color: var(--theme-color-hover);
   cursor: pointer;
-  margin: 6px 6px 0;
   padding: 8px;
   border-radius: 3px;
 }
 
-/* #wa-codes span:hover {
+#wa-codes span:hover {
   --_p: 60%;
   color: var(--c);
-  transition: .15s .4s, background-position .3s cubic-bezier(0, 1.25, 1, 1.8);
+  transition: .15s .3s, background-position .2s cubic-bezier(0, 1.25, 1, 1.8);
 }
 
 #wa-codes span.code-active {
   --_p: 60%;
   color: var(--c);
-} */
+}
 
 #wa-codes svg {
   display: block;
@@ -264,7 +261,7 @@ a {
 
 #wa-compile {
   flex-shrink: 0;
-  padding: 6px 10px;
+  padding: 4px 8px;
   background: var(--theme-color);
   color: var(--theme-background);
   border-radius: 4px;
