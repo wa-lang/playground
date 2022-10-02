@@ -1,7 +1,8 @@
-# 凹语言™ 在线游乐场(Payground)
+<sub><em>The Wa Payground</em></sub>
+<h1 align="center">凹语言™ 游乐场</h1>
 
-不依赖后台 Web 服务，纯 WASM 环境编译并执行：
+> 不依赖后台 Web 服务，纯 WASM 环境编译并执行
 
-[![](https://wa-lang.org/smalltalk/images/st0011-01.png)](https://wa-lang.org/playground/)
+[在线地址](https://wa-lang.org/playground/)
+[![](./docs/assets/preview.png)](https://wa-lang.org/playground/)
 
-https://wa-lang.org/playground
