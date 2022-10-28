@@ -11,6 +11,41 @@ const FEATURES = {
   'reference_types': false
 };
 
+class WaApp {
+	constructor() {
+		this._inst = null;
+	}
+  
+	Init(instance) {
+		this._inst = instance;
+  }
+
+	async Run(instance) {
+		this._inst = instance;
+		this._inst.exports.main();
+	}
+
+	Mem() {
+		return this._inst.exports.memory;
+	}
+	MemView(addr, len) {
+		return new DataView(this._inst.exports.memory.buffer, addr, len);
+	}
+	MemUint8Array(addr, len) {
+		return new Uint8Array(this.Mem().buffer, addr, len)
+	}
+
+	GetString(addr, len) {
+		return new TextDecoder("utf-8").decode(this.MemView(addr, len));
+	}
+	SetString(addr, len, s) {
+		const bytes = new TextEncoder("utf-8").encode(s);
+		if(len > bytes.length) { len = bytes.length; }
+		this.MemUint8Array(addr, len).set(bytes);
+	}
+}
+
+const waApp = new WaApp();
 
 async function parseWaWat() {
   const wabt = await WabtModule();
@@ -31,7 +66,8 @@ async function parseWaWat() {
         }
       }
       this.waPuts = (prt, len) => {
-        // todo
+        let s = waApp.GetString(ptr, len);
+        console.log(s);
       }
     }
   }
@@ -57,6 +93,8 @@ async function parseWaWat() {
     try {
       const module = new WebAssembly.Module(binary)
       const wasmInst = new WebAssembly.Instance(module, importsObject);
+      waApp.Init(wasmInst);
+
       const { main } = wasmInst.exports;
       main()
     } catch (e) {
