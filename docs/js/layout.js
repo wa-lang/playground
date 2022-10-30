@@ -1,7 +1,10 @@
 window.onload = function () {
   document.querySelector('.wa-loading').style.display = 'none';
+  const localThemes = localStorage.getItem('vitepress-theme-appearance')
 
-  const curTheme = localStorage.getItem('waTheme') ?? 'light'
+  const curTheme = localThemes === 'auto'
+    ? window.matchMedia(`(prefers-color-scheme: dark)`).matches
+    : localThemes
   updateThemeContent(curTheme)
 };
 
@@ -24,7 +27,7 @@ function updateThemeContent(theme) {
   iconDom.innerHTML = isLight ? waLightIcon : waDarkIcon
   const mode = isLight ? 'remove' : 'toggle'
   document.body.classList[mode]('dark-theme')
-  localStorage.setItem('waTheme', isLight ? 'light' : 'dark')
+  localStorage.setItem('vitepress-theme-appearance', isLight ? 'light' : 'dark')
 }
 
 (() => {
