@@ -2,7 +2,7 @@ module github.com/wa-lang/playground
 
 go 1.17
 
-require github.com/wa-lang/wa v0.2.1
+require github.com/wa-lang/wa v0.3.0
 
 require (
 	github.com/tetratelabs/wazero v1.0.0-pre.1 // indirect
