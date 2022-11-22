@@ -60,8 +60,8 @@ async function parseWaWat() {
       const wasmInst = new WebAssembly.Instance(module, importsObject);
       window.waApp.init(wasmInst);
 
-      const { main } = wasmInst.exports;
-      main()
+      const { _start } = wasmInst.exports;
+      _start()
     } catch (e) {
       waPrint = e.toString()
     }

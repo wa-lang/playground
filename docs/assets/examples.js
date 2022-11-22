@@ -3,42 +3,7 @@ const LICENSE = `# 版权 @2019 凹语言 作者。保留所有权利。
 
 const EG_HELLO = `${LICENSE}
 fn main() {
-  for r := 0; r <= 12; r++ { 
-    for c := 0; c < 24; c++ {
-      if r <= 3 {
-        if c < 8 || c >= 16 {
-          if r == 1 && (c == 3 || c == 19) {
-            print('[')
-          } else if r == 1 && (c == 4 || c == 20) { 
-            print(']')
-          } else {
-            print('*')
-          }
-        } else {
-          print(' ')
-        }
-      } else if 
-        (r == 8 && c == 6) ||
-        (r == 9 && c == 7) ||
-        (r == 10 && c == 8) ||
-        (r == 8 && c == 12) ||
-        (r == 9 && c == 13) ||
-        (r == 10 && c == 14) {
-        print('\\\\')
-      } else if
-        (r == 8 && c == 17) ||
-        (r == 9 && c == 16) ||
-        (r == 10 && c == 15) ||
-        (r == 8 && c == 11) ||
-        (r == 9 && c == 10) ||
-        (r == 10 && c == 9) {
-        print('/')
-      } else { 
-        print('*')
-      }
-    }
-    println()
-  }
+	println(40+2)
 }
 `
 
