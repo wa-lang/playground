@@ -56,12 +56,19 @@ async function parseWaWat() {
   const run = (binary) => {
     if (binary === null) return;
     try {
-      const module = new WebAssembly.Module(binary)
-      const wasmInst = new WebAssembly.Instance(module, importsObject);
-      window.waApp.init(wasmInst);
-
-      const { _start } = wasmInst.exports;
-      _start()
+        WebAssembly.compile(binary).then((module) => {
+          const wasmInst = new WebAssembly.Instance(module, importsObject);
+          window.waApp.init(wasmInst);
+          const { _start } = wasmInst.exports;
+          _start()
+        }
+      )
+      
+      //const module = new WebAssembly.Module(binary)
+      //const wasmInst = new WebAssembly.Instance(module, importsObject);
+      //window.waApp.init(wasmInst);
+      //const { _start } = wasmInst.exports;
+      //_start()
     } catch (e) {
       waPrint = e.toString()
     }
