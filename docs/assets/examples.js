@@ -2,8 +2,18 @@ const LICENSE = `# 版权 @2019 凹语言 作者。保留所有权利。
 `;
 
 const EG_HELLO = `${LICENSE}
-fn main() {
-	println(40+2)
+import "fmt"
+import "runtime"
+
+fn main {
+	println("你好，凹语言！", runtime.WAOS)
+	println(add(40, 2))
+
+	fmt.Println(1+1)
+}
+
+fn add(a: i32, b: i32) => i32 {
+	return a+b
 }
 `
 
