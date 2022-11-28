@@ -29,7 +29,6 @@ const importsObject = {
     this.waPuts = (prt, len) => {
       let s = window.waApp.getString(prt, len);
       waPrint += s
-      console.log(s);
     }
   }
 }
@@ -57,6 +56,7 @@ async function parseWaWat() {
   await run(binary);
 
   window['waPrint'] = waPrint
+
 
   const outActiveDom = document.querySelector('.output-active')
   const outIndex = Array.prototype.indexOf.call(outActiveDom.parentNode.children, outActiveDom)

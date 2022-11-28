@@ -18,6 +18,7 @@ WebAssembly.instantiateStreaming(fetch("https://wa-lang.org/wa/wa.wasm"), go.imp
 });
 
 async function wa2wat() {
+  waPrint = ''
   await go.run(wasmInst);
   wasmInst = await WebAssembly.instantiate(wasmMod, go.importObject);
   await parseWaWat()
