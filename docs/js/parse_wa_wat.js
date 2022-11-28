@@ -11,31 +11,31 @@ const FEATURES = {
   'reference_types': false
 };
 
-async function parseWaWat() {
-  const wabt = await WabtModule();
-  let waPrint = ""
-
-  const importsObject = {
-    wa_js_env: new function () {
-      this.waPrintI32 = (i) => {
-        waPrint += i
+let waPrint = ""
+const importsObject = {
+  wa_js_env: new function () {
+    this.waPrintI32 = (i) => {
+      waPrint += i
+    }
+    this.waPrintRune = (c) => {
+      let ch = String.fromCodePoint(c);
+      if (ch == '\n') {
+        waPrint += '\n'
       }
-      this.waPrintRune = (c) => {
-        let ch = String.fromCodePoint(c);
-        if (ch == '\n') {
-          waPrint += '\n'
-        }
-        else {
-          waPrint += ch
-        }
-      }
-      this.waPuts = (prt, len) => {
-        let s = window.waApp.getString(prt, len);
-        waPrint += s
-        console.log(s);
+      else {
+        waPrint += ch
       }
     }
+    this.waPuts = (prt, len) => {
+      let s = window.waApp.getString(prt, len);
+      waPrint += s
+      console.log(s);
+    }
   }
+}
+
+async function parseWaWat() {
+  const wabt = await WabtModule();
 
   const waCompile = () => {
     let outputLog = '';
@@ -53,29 +53,8 @@ async function parseWaWat() {
     }
   }
 
-  const run = (binary) => {
-    if (binary === null) return;
-    try {
-      //  WebAssembly.compile(binary).then((module) => {
-      //    const wasmInst = new WebAssembly.Instance(module, importsObject);
-      //    window.waApp.init(wasmInst);
-      //    const { _start } = wasmInst.exports;
-      //    _start()
-      //  }
-      //)
-
-      const module = new WebAssembly.Module(binary)
-      const wasmInst = new WebAssembly.Instance(module, importsObject);
-      window.waApp.init(wasmInst);
-      const { _start } = wasmInst.exports;
-      _start()
-    } catch (e) {
-      waPrint = e.toString()
-    }
-  }
-
   const binary = waCompile();
-  run(binary);
+  await run(binary);
 
   window['waPrint'] = waPrint
 
@@ -85,4 +64,18 @@ async function parseWaWat() {
   const waOutputCode = document.getElementById('wa-output-code')
   const isError = window[outInnerHTML].includes('TypeError: WebAssembly.Module()')
   waOutputCode.innerHTML = window[isError ? 'waWat' : outInnerHTML]
+}
+
+async function run(binary) {
+  if (binary === null) return;
+  try {
+    const module = await WebAssembly.compile(binary);
+    const wasmInst = await WebAssembly.instantiate(module, importsObject);
+    window.waApp.init(wasmInst);
+    const { _start } = wasmInst.exports;
+    _start()  //*/
+
+  } catch (e) {
+    waPrint = e.toString()
+  }
 }
