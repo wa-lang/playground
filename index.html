@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" size="16x16" href="assets/logo.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/lib/codemirror.css">
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <title>The Wa Playground</title>
+</head>
+
+<body>
+
+  <div id="wa-playground">
+
+    <div id="wa-header">
+      <div class="header-inner">
+        <div class="identity">
+          <div class="logo">
+            <a href="https://wa-lang.org/"><img src="assets/logo.svg" alt="logo" /></a>
+          </div>
+          <div class="title">The Wa Playground</div>
+        </div>
+        <nav>
+          <ul class="icon-nav">
+            <li data-type="theme"></li>
+            <li data-type="home"></li>
+            <li data-type="github"></li>
+            <li data-type="download"></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <div id="wa-main">
+      <div class="split">
+        <div id="split-code">
+          <div class="code-header">
+            <div id="wa-examples"><select></select></div>
+            <div id="wa-fmt" onclick="waFmt()"><span>FMT</span> </div>
+            <div id="wa-compile" onclick="wa2wat()"><span>RUN</span> </div>
+          </div>
+          <div id="wa-editor" style="height: 100%"></div>
+        </div>
+        <div id="split-output">
+          <div class="output-nav">
+            <div class="output-nav-inner"></div>
+          </div>
+          <div id="wa-output">
+            <pre><code id="wa-output-code"></code></pre>
+            <div class="wa-output-loading">
+              <img src="assets/logo-ani.svg">
+              <span>Loading Wa...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wa-loading">
+      <div class="wa-loading-content">
+        <img src="assets/logo-ani.svg">
+        <span>Loading...</span>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/split.js@1.6.5/dist/split.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/lib/codemirror.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.8/addon/mode/simple.js"></script>
+    <script src="assets/config.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/wa_app.js"></script>
+    <script async src="js/init.js"></script>
+    <script src="assets/wa_mode.js"></script>
+    <script src="assets/wasm_exec.js"></script>
+    <script src="assets/libwabt.js"></script>
+    <script src="/js/parse_wa_wat.js"></script>
+</body>
+
+</html>

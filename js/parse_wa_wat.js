@@ -11,24 +11,24 @@ const FEATURES = {
   'reference_types': false
 };
 
-let waPrint = ""
+var __WA_PRINT__ = ""
 const importsObject = {
   wa_js_env: new function () {
     this.waPrintI32 = (i) => {
-      waPrint += i
+      __WA_PRINT__ += i
     }
     this.waPrintRune = (c) => {
       let ch = String.fromCodePoint(c);
       if (ch == '\n') {
-        waPrint += '\n'
+        __WA_PRINT__ += '\n'
       }
       else {
-        waPrint += ch
+        __WA_PRINT__ += ch
       }
     }
     this.waPuts = (prt, len) => {
       let s = window.waApp.getString(prt, len);
-      waPrint += s
+      __WA_PRINT__ += s
     }
   }
 }
@@ -39,7 +39,7 @@ async function parseWaWat() {
   const waCompile = () => {
     let outputLog = '';
     try {
-      var module = wabt.parseWat('wa.wat', window.waWat, FEATURES);
+      var module = wabt.parseWat('wa.wat', window['__WA_WAT__'], FEATURES);
       module.resolveNames();
       module.validate(FEATURES);
       const binaryOutput = module.toBinary({ log: true, write_debug_names: true });
@@ -55,15 +55,9 @@ async function parseWaWat() {
   const binary = waCompile();
   await run(binary);
 
-  window['waPrint'] = waPrint
+  window['__WA_PRINT__'] = __WA_PRINT__
 
-
-  const outActiveDom = document.querySelector('.output-active')
-  const outIndex = Array.prototype.indexOf.call(outActiveDom.parentNode.children, outActiveDom)
-  const outInnerHTML = outIndex === 0 ? 'waPrint' : 'waWat'
-  const waOutputCode = document.getElementById('wa-output-code')
-  const isError = window[outInnerHTML].includes('TypeError: WebAssembly.Module()')
-  waOutputCode.innerHTML = window[isError ? 'waWat' : outInnerHTML]
+  updateOutput()
 }
 
 async function run(binary) {
@@ -72,10 +66,17 @@ async function run(binary) {
     const module = await WebAssembly.compile(binary);
     const wasmInst = await WebAssembly.instantiate(module, importsObject);
     window.waApp.init(wasmInst);
-    const { _start } = wasmInst.exports;
-    _start()  //*/
-
+    wasmInst.exports._start();
   } catch (e) {
-    waPrint = e.toString()
+    __WA_PRINT__ = e.toString()
   }
+}
+
+function updateOutput() {
+  const outActiveDom = document.querySelector('.output-active')
+  const outIndex = Array.prototype.indexOf.call(outActiveDom.parentNode.children, outActiveDom)
+  const outInnerHTML = outIndex === 0 ? '__WA_PRINT__' : '__WA_WAT__'
+  const waOutputCode = document.getElementById('wa-output-code')
+  const isError = window[outInnerHTML].includes('TypeError: WebAssembly.Module()')
+  waOutputCode.innerHTML = window[isError ? '__WA_WAT__' : outInnerHTML]
 }

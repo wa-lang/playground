@@ -1,3 +1,5 @@
-default:
-	GOOS=js GOARCH=wasm go build -o docs/assets/wa.out.wasm
+build_examples:
+	node scripts/build_examples.js
+
+server:
 	python3 -m http.server

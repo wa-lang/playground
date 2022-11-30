@@ -217,7 +217,7 @@ a {
   flex-shrink: 0;
 }
 
-#wa-codes {
+#wa-examples {
   flex: 1;
   margin: 8px;
   display: flex;
@@ -228,37 +228,25 @@ a {
   border-bottom: 0.5px solid var(--theme-handle-background);
 }
 
-#wa-codes span {
-  --s: 1.5px;
-  --c: #21B2AA;
-  background: 
-     linear-gradient(var(--c) 0 0) no-repeat
-     calc(var(--_p, 0%) - 10%) 100% / calc(var(--_p, 0%)) var(--s);
-  transition: .2s, background-position .3s .2s;
-  color: var(--theme-color-hover);
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 3px;
-}
-
-#wa-codes span:hover {
-  --_p: 60%;
-  color: var(--c);
-  transition: .15s .3s, background-position .2s cubic-bezier(0, 1.25, 1, 1.8);
-}
-
-#wa-codes span.code-active {
-  --_p: 60%;
-  color: var(--c);
-}
-
-#wa-codes svg {
-  display: block;
+#wa-examples select {
+  min-width: 150px;
+  height: 32px;
+  padding: 4px 8px;
+  margin: 0 8px;
+  border: 2px solid #21B2AA;;
+  outline: none;
+  background: transparent;
   color: var(--theme-color);
-  cursor: pointer;
-  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
+#wa-examples select option {
+  color: var(--theme-color);
+}
+
+#wa-fmt,
 #wa-compile {
   flex-shrink: 0;
   padding: 4px 8px;
@@ -273,6 +261,7 @@ a {
   align-items: center;
 }
 
+#wa-fmt svg,
 #wa-compile svg {
   margin-left: 8px;
 }
@@ -340,26 +329,6 @@ a {
 }
 .output-nav-inner span.output-active svg {
   color: var(--theme-color);
-}
-
-.output-operate {
-  margin: 8px 8px 0px;
-  flex-direction: row;
-  align-items: center;
-  display: flex;
-}
-
-.output-operate a svg {
-  display: block;
-  color: var(--theme-color);
-  cursor: pointer;
-  background: var(--theme-foreground);
-  border-radius: 6px;
-  padding: 2px
-}
-
-.output-operate a svg:hover{
-  background: var(--theme-selection-background);
 }
 
 #wa-output {
