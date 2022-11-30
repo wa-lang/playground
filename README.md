@@ -5,5 +5,5 @@
 
 [在线地址](https://wa-lang.org/playground/)
 
-[![](./docs/assets/preview.png)](https://wa-lang.org/playground/)
+[![](./assets/preview.png)](https://wa-lang.org/playground/)
 
