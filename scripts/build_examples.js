@@ -4,6 +4,7 @@ const path = require('path')
 const examples = {}
 const examplesDir = path.resolve(__dirname, '../examples')
 const files = fs.readdirSync(examplesDir)
+const defaultOrder = ['hello', 'count', 'heart', 'brainfuck']
 
 files.forEach((file) => {
   const filePath = path.join(examplesDir, file)
@@ -19,6 +20,16 @@ files.forEach((file) => {
   }
 })
 
-const examplesJson = JSON.stringify(examples)
+const orderedExamples = defaultOrder
+  .reduce((acc, key) => {
+    if (examples[key]) { acc[key] = examples[key] }
+    return acc
+  }, {})
+const otherExamples = Object.keys(examples)
+  .filter((key) => !defaultOrder.includes(key))
+  .reduce((acc, key) => { acc[key] = examples[key]; return acc }, {})
+const allExamples = Object.assign({}, orderedExamples, otherExamples)
+
+const examplesJson = JSON.stringify(allExamples)
 
 fs.writeFileSync(path.resolve(__dirname, '../assets/examples.json'), examplesJson)
