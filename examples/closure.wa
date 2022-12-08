@@ -21,7 +21,7 @@ fn main() {
 	println(o.i)  //22
 	
 	n := i32(21)
-	g_f = fn(i: i32) => i32{
+	g_f = fn(i: i32) => i32 {
 		n += i
 		return n
 	}
