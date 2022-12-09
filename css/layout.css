@@ -235,7 +235,7 @@ a {
   margin: 0 8px;
   border: 2px solid #21B2AA;;
   outline: none;
-  background: transparent;
+  background: var(--theme-background);
   color: var(--theme-color);
   border-radius: 4px;
   font-size: 14px;
@@ -243,6 +243,7 @@ a {
 }
 
 #wa-examples select option {
+  background: var(--theme-background);
   color: var(--theme-color);
 }
 
