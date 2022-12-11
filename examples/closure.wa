@@ -17,24 +17,24 @@ fn main() {
 	var o ST
 	o.i = 11
 	g_f = o.meth
-	println(g_f(11))  //22
-	println(o.i)  //22
+	println(g_f(11))  # 22
+	println(o.i)  # 22
 	
 	n := i32(21)
 	g_f = fn(i: i32) => i32 {
 		n += i
 		return n
 	}
-	println(g_f(22))  //43
-	println(n)  //43
+	println(g_f(22))  # 43
+	println(n)  # 43
 	
 	fn(i: i32) {
 		n += i
 	}(22)
-	println(n)  //65
+	println(n)  # 65
 	
 	g_f = Double
-	println(g_f(13))  //26
+	println(g_f(13))  # 26
 }
 
 fn Double(i: i32) => i32 {

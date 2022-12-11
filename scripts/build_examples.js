@@ -32,4 +32,7 @@ const allExamples = Object.assign({}, orderedExamples, otherExamples)
 
 const examplesJson = JSON.stringify(allExamples)
 
-fs.writeFileSync(path.resolve(__dirname, '../assets/examples.json'), examplesJson)
+const initJsPath = path.resolve(__dirname, '../js/init.js')
+const initJs = fs.readFileSync(initJsPath, 'utf-8')
+const newInitJs = initJs.replace(/const __WA_EXAMPLES__ = .*/, `const __WA_EXAMPLES__ = ${examplesJson}`)
+fs.writeFileSync(initJsPath, newInitJs)
