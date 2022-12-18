@@ -6,7 +6,7 @@
 var waEditor = CodeMirror(document.getElementById('wa-editor'), {
   mode: 'wa',
   lineNumbers: true,
-  tabSize: 2,
+  tabSize: 4,
   theme: "wa",
 });
 
