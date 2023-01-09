@@ -12,7 +12,7 @@
     const keywords = {
       "break": true, "defer": true, "import": true, "struct": true, "case": true,
       "else": true, "interface": true, "switch": true, "const": true, "for": true,
-      "map": true, "type": true, "continue": true, "fn": true, "range": true,
+      "map": true, "type": true, "continue": true, "func": true, "range": true,
       "var": true, "default": true, "if": true, "return": true, "println": true,
       "print": true, "main": true,
       "跳出": true, "有辙": true, "常量": true, "继续": true, "没辙": true, "善后": true,
@@ -45,9 +45,15 @@
         curPunc = ch;
         return null;
       }
-      if (ch == "#") {
-        stream.skipToEnd();
-        return "comment";
+      if (ch == "/") {
+        if (stream.eat("*")) {
+          state.tokenize = tokenComment;
+          return tokenComment(stream, state);
+        }
+        if (stream.eat("/")) {
+          stream.skipToEnd();
+          return "comment";
+        }
       }
       if (isOperatorChar.test(ch)) {
         stream.eatWhile(isOperatorChar);
@@ -73,6 +79,18 @@
           state.tokenize = tokenBase;
         return "string";
       };
+    }
+
+    function tokenComment(stream, state) {
+      var maybeEnd = false, ch;
+      while (ch = stream.next()) {
+        if (ch == "/" && maybeEnd) {
+          state.tokenize = tokenBase;
+          break;
+        }
+        maybeEnd = (ch == "*");
+      }
+      return "comment";
     }
 
     function Context(indented, column, type, align, prev) {
@@ -143,7 +161,9 @@
       electricChars: "{}):",
       closeBrackets: "()[]{}''\"\"``",
       fold: "brace",
-      lineComment: "#"
+      blockCommentStart: "/*",
+      blockCommentEnd: "*/",
+      lineComment: "//"
     };
   });
 
