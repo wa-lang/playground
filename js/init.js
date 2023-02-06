@@ -10,8 +10,6 @@ var waEditor = CodeMirror(document.getElementById('wa-editor'), {
   theme: "wa",
 });
 
-
-
 /*****************************************
 *                                        *
 *              init examples             *
@@ -53,11 +51,12 @@ outputNavChild[0].classList.add('output-active')
 for (let i = 0; i < outputNavChild.length; i++) {
   const curKey = i == 0 ? '__WA_PRINT__' : '__WA_WAT__'
   outputNavChild[i].onclick = function () {
-    let outputActiveDom = document.querySelector('.output-active')
+    const outputActiveDom = document.querySelector('.output-active')
     outputActiveDom.classList.remove('output-active')
     this.classList.add('output-active')
-    const isError = window[curKey].includes('TypeError: WebAssembly.Module()')
-    waOutputCode.innerHTML = window[isError ? '__WA_WAT__' : curKey]
+    const isError = window['__WA_ERROR__'] !== ''
+    const innerHTML = window[isError ? '__WA_ERROR__' : curKey]
+    waOutputCode.innerHTML = isError ? fmtErrMsg(innerHTML) : innerHTML
   }
 }
 
@@ -94,4 +93,9 @@ async function wa2wat() {
 
 async function waFmt() {
   waEditor.setValue(window['__WA_FMT_CODE__'])
+}
+
+function fmtErrMsg(errMsg) {
+  if (/^\d/.test(errMsg)) { return 'WA ERROR:' + errMsg }
+  return errMsg.replace(/hello\.wa/g, 'WA ERROR')
 }

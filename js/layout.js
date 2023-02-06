@@ -24,8 +24,6 @@
   updateThemeContent(curTheme)
 })()
 
-
-
 function updateTheme() {
   const isDark = document.body.classList.contains('dark-theme')
   updateThemeContent(isDark ? 'light' : 'dark')

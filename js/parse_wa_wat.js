@@ -75,8 +75,9 @@ async function run(binary) {
 function updateOutput() {
   const outActiveDom = document.querySelector('.output-active')
   const outIndex = Array.prototype.indexOf.call(outActiveDom.parentNode.children, outActiveDom)
-  const outInnerHTML = outIndex === 0 ? '__WA_PRINT__' : '__WA_WAT__'
+  const curKey = outIndex === 0 ? '__WA_PRINT__' : '__WA_WAT__'
   const waOutputCode = document.getElementById('wa-output-code')
-  const isError = window[outInnerHTML].includes('TypeError: WebAssembly.Module()')
-  waOutputCode.innerHTML = window[isError ? '__WA_WAT__' : outInnerHTML]
+  const isError = window['__WA_ERROR__'] !== ''
+  const innerHTML = window[isError ? '__WA_ERROR__' : curKey]
+  waOutputCode.innerHTML = isError ? fmtErrMsg(innerHTML) : innerHTML
 }
