@@ -75,7 +75,8 @@ if (!WebAssembly.instantiateStreaming) {
 const go = new Go();
 let wasmMod, wasmInst;
 
-WebAssembly.instantiateStreaming(fetch("https://wa-lang.org/wa/wa.wasm"), go.importObject).then((result) => {
+// backup：https://wa-lang.org/wa/wa.wasm
+WebAssembly.instantiateStreaming(fetch("assets/wa.wasm"), go.importObject).then((result) => {
   wasmMod = result.module;
   wasmInst = result.instance;
   document.querySelector('.wa-output-loading').style.display = 'none'
