@@ -4,7 +4,7 @@ const path = require('path')
 const examples = {}
 const examplesDir = path.resolve(__dirname, '../examples')
 const files = fs.readdirSync(examplesDir)
-const defaultOrder = ['hello', 'hello-zh', 'count', 'heart', 'brainfuck', 'iface']
+const defaultOrder = ['hello', 'count', 'heart', 'brainfuck', 'iface']
 
 files.forEach((file) => {
   const filePath = path.join(examplesDir, file)
