@@ -4,7 +4,7 @@ const path = require('path')
 const examples = {}
 const examplesDir = path.resolve(__dirname, '../examples')
 const files = fs.readdirSync(examplesDir)
-const defaultOrder = ['hello', 'count', 'heart', 'brainfuck']
+const defaultOrder = ['hello', 'hello-zh', 'count', 'heart', 'brainfuck', 'iface']
 
 files.forEach((file) => {
   const filePath = path.join(examplesDir, file)
@@ -16,6 +16,10 @@ files.forEach((file) => {
   }
   if (stat.isFile() && path.extname(filePath) === '.wa') {
     const name = path.basename(filePath, '.wa')
+    examples[name] = fs.readFileSync(filePath, 'utf-8')
+  }
+  if (stat.isFile() && path.extname(filePath) === '.wz') {
+    const name = path.basename(filePath, '.wz')
     examples[name] = fs.readFileSync(filePath, 'utf-8')
   }
 })
