@@ -13,12 +13,7 @@
       "break": true, "defer": true, "import": true, "struct": true, "case": true,
       "else": true, "interface": true, "switch": true, "const": true, "for": true,
       "map": true, "type": true, "continue": true, "func": true, "range": true,
-      "var": true, "default": true, "if": true, "return": true, "println": true,
-      "print": true, "main": true,
-      "跳出": true, "有辙": true, "常量": true, "继续": true, "没辙": true, "善后": true,
-      "否则": true, "循环": true, "函数": true, "如果": true, "导入": true, "接口": true,
-      "字典": true, "区间": true, "返回": true, "结构": true, "找辙": true, "类型": true,
-      "变量": true,
+      "var": true, "default": true, "if": true, "return": true,
     };
 
     const isOperatorChar = /(\+|&|\+=|&=|&&|==|!=|-|\||-=|\|=|\|\||<|<=|\*|\^|\*=|\^=|<-|>|>=|\/|<<|\/=|<<=|\+\+|=|:=|%|>>|%=|>>=|\-\-|!|&\^|&\^=)/;
