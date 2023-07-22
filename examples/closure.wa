@@ -11,10 +11,10 @@ func ST.meth(p: i32) => i32 {
 	return this.i
 }
 
-var g_f: FP
+global g_f: FP
 
-func main() {
-	var o: ST
+func main {
+	o: ST
 	o.i = 11
 	g_f = o.meth
 	println(g_f(11)) // 22

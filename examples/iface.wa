@@ -12,11 +12,11 @@ type i1 interface {
 	f()
 }
 
-func S1.f() {
+func S1.f {
 	println("This is S1, this.a==", this.a)
 }
 
-func S2.f() {
+func S2.f {
 	println("This is S2, this.a==", this.a)
 }
 
@@ -24,7 +24,7 @@ func main {
 	v1 := S1{a: 13}
 	v2 := S2{a: 42}
 
-	var i: i1 = &v1
+	i: i1 = &v1
 	i.f()
 
 	i = &v2
