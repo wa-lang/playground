@@ -81,16 +81,16 @@ if (!WebAssembly.instantiateStreaming) {
 const go = new Go();
 let wasmMod, wasmInst;
 
-// assets/wa.wasm
-// backup：https://wa-lang.org/wa/wa.wasm
-WebAssembly.instantiateStreaming(fetch("https://wa-lang.org/wa/wa.wasm"), go.importObject).then((result) => {
+const zip = new JSZip();
+(async () => {
+  const wasmZip = await (await fetch("https://wa-lang.org/wa/wa.wasm.zip")).blob();
+  const wasmBuf = await (await zip.loadAsync(wasmZip)).file("wa.wasm").async("arraybuffer")
+  const result = await WebAssembly.instantiate(wasmBuf, go.importObject);
   wasmMod = result.module;
   wasmInst = result.instance;
-  document.querySelector('.wa-output-loading').style.display = 'none'
-  wa2wat()
-}).catch((err) => {
-  console.error(err);
-});
+  document.querySelector('.wa-output-loading').style.display = 'none';
+  wa2wat();
+})().catch(err => console.error(err));
 
 async function wa2wat() {
   __WA_PRINT__ = ''
