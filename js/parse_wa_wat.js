@@ -33,8 +33,20 @@ const importsObject = {
   }
 }
 
+let libwabtJS;
+async function loadLibwabt() {
+  if (libwabtJS) {
+    eval(libwabtJS);
+    return WabtModule()
+  }
+  const libwabtZip = await (await fetch("assets/libwabt.js.zip")).blob();
+  libwabtJS = await (await JSZip.loadAsync(libwabtZip)).file("libwabt.js").async("string");
+  eval(libwabtJS);
+  return WabtModule();
+}
+
 async function parseWaWat() {
-  const wabt = await WabtModule();
+  const wabt = await loadLibwabt();
 
   const waCompile = () => {
     let outputLog = '';

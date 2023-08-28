@@ -1,3 +1,4 @@
+const zip = new JSZip();
 /*****************************************
 *                                        *
 *               init editor              *
@@ -81,7 +82,6 @@ if (!WebAssembly.instantiateStreaming) {
 const go = new Go();
 let wasmMod, wasmInst;
 
-const zip = new JSZip();
 (async () => {
   const wasmZip = await (await fetch("https://wa-lang.org/wa/wa.wasm.zip")).blob();
   const wasmBuf = await (await zip.loadAsync(wasmZip)).file("wa.wasm").async("arraybuffer")
@@ -90,7 +90,7 @@ const zip = new JSZip();
   wasmInst = result.instance;
   document.querySelector('.wa-output-loading').style.display = 'none';
   wa2wat();
-})().catch(err => console.error(err));
+})().catch(console.error);
 
 async function wa2wat() {
   __WA_PRINT__ = ''
