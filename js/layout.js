@@ -4,6 +4,11 @@
   const direction = isMobile() ? "vertical" : 'horizontal'
   const flexDirection = isMobile() ? "column" : "row"
 
+  if (isMobile()) { 
+    const titleDom = document.querySelector('.header-inner .identity .title') 
+    titleDom.style.display = 'none'
+  }
+
   const splitDom = document.querySelector('.split')
   splitDom.style.flexDirection = flexDirection
 
