@@ -13,11 +13,36 @@ const FEATURES = {
 
 var __WA_PRINT__ = ""
 const importsObject = {
-  wa_js_env: new function () {
-    this.waPrintI32 = (i) => {
-      __WA_PRINT__ += i
+  syscall_js: new function () {
+    this.print_bool = (v) => {
+      if(v) {
+        __WA_PRINT__ += 'true';
+      } else {
+        __WA_PRINT__ += 'false';
+      }
     }
-    this.waPrintRune = (c) => {
+    this.print_i32 = (i) => {
+      __WA_PRINT__ += i;
+    }
+    this.print_u32 = (i) => {
+      __WA_PRINT__ += i;
+    }
+    this.print_ptr = (i) => {
+      __WA_PRINT__ += i;
+    }
+    this.print_i64 = (i) => {
+      __WA_PRINT__ += i;
+    }
+    this.print_u64 = (i) => {
+      __WA_PRINT__ += i;
+    }
+    this.print_f32 = (i) => {
+      __WA_PRINT__ += i;
+    }
+    this.print_f64 = (i) => {
+      __WA_PRINT__ += i;
+    }
+    this.print_rune = (c) => {
       let ch = String.fromCodePoint(c);
       if (ch == '\n') {
         __WA_PRINT__ += '\n'
@@ -26,9 +51,12 @@ const importsObject = {
         __WA_PRINT__ += ch
       }
     }
-    this.waPuts = (prt, len) => {
+    this.print_str = (prt, len) => {
       let s = window.waApp.getString(prt, len);
       __WA_PRINT__ += s
+    }
+    this.proc_exit = (i) => {
+      // exit(i);
     }
   }
 }
