@@ -107,6 +107,7 @@ async function run(binary) {
     const wasmInst = await WebAssembly.instantiate(module, importsObject);
     window.waApp.init(wasmInst);
     wasmInst.exports._start();
+    wasmInst.exports['__main__.main']();
   } catch (e) {
     __WA_PRINT__ = e.toString()
   }
