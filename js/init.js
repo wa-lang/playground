@@ -83,7 +83,7 @@ const go = new Go();
 let wasmMod, wasmInst;
 
 (async () => {
-  const wasmZip = await (await fetch("https://wa-lang.org/wa/wa.wasm.zip")).blob();
+  const wasmZip = await (await fetch("https://wa-lang.org/wa/wa-js/wa.wasm.zip")).blob();
   const wasmBuf = await (await zip.loadAsync(wasmZip)).file("wa.wasm").async("arraybuffer")
   const result = await WebAssembly.instantiate(wasmBuf, go.importObject);
   wasmMod = result.module;
