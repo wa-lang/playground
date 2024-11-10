@@ -5,15 +5,11 @@ func main {
 	defer println("a2")
 	println("a3")
 
-	func {
-		for i := 0; i < 3; i++ {
-			defer println("i.v0:", i)
-		}
-	}()
+	for i := 0; i < 3; i++ {
+		defer println("i.v0:", i)
+	}
 
-	func {
-		for i := 0; i < 3; i++ {
-			defer func { println("i.v1:", i) } ()
-		}
-	}()
+	for i := 0; i < 3; i++ {
+		defer func { println("i.v1:", i) } ()
+	}
 }
