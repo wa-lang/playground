@@ -61,38 +61,8 @@ const importsObject = {
   }
 }
 
-let libwabtJS;
-async function loadLibwabt() {
-  if (libwabtJS) {
-    eval(libwabtJS);
-    return WabtModule()
-  }
-  const libwabtZip = await (await fetch("assets/libwabt.js.zip")).blob();
-  libwabtJS = await (await JSZip.loadAsync(libwabtZip)).file("libwabt.js").async("string");
-  eval(libwabtJS);
-  return WabtModule();
-}
-
 async function parseWaWat() {
-  const wabt = await loadLibwabt();
-
-  const waCompile = () => {
-    let outputLog = '';
-    try {
-      var module = wabt.parseWat('wa.wat', window['__WA_WAT__'], FEATURES);
-      module.resolveNames();
-      module.validate(FEATURES);
-      const binaryOutput = module.toBinary({ log: true, write_debug_names: true });
-      outputLog = binaryOutput.log;
-      return binaryOutput.buffer
-    } catch (e) {
-      outputLog += e.toString();
-    } finally {
-      if (module) module.destroy();
-    }
-  }
-
-  const binary = waCompile();
+  const binary = window['__WA_WASM__'];
   await run(binary);
 
   window['__WA_PRINT__'] = __WA_PRINT__
