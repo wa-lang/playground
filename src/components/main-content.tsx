@@ -1,19 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useIsMobile } from '../hooks/useIsMobile'
 import { EditorPane } from './editor/editor-pane'
 import { PreviewPane } from './preview/preview-pane'
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from './ui/resizable'
 
 export function MainContent() {
-  const [direction, setDirection] = useState<'horizontal' | 'vertical'>('horizontal')
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setDirection(window.innerWidth < 768 ? 'vertical' : 'horizontal')
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const isMobile = useIsMobile()
+  const direction = isMobile ? 'vertical' : 'horizontal'
 
   return (
     <ResizablePanelGroup direction={direction} className="h-full">

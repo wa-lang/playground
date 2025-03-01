@@ -9,6 +9,7 @@ import Editor from '@monaco-editor/react'
 import { useEffect, useRef, useState } from 'react'
 import examples from '../../../public/examples.json'
 import { SkeletonCode } from '../skeleton-code'
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface ICode {
   name: string
@@ -16,19 +17,25 @@ interface ICode {
 }
 
 export function EditorPane() {
+  const isMobile = useIsMobile()
   const [current, setCurrent] = useState<ICode | null>(examples[0])
   const monacoInst = useWaMonaco()
   const { theme } = useConfigStore()
   const monacoTheme = theme === 'dark' ? 'vitesse-dark' : 'vitesse-light'
   const editorRef = useRef<MonacoType.editor.IStandaloneCodeEditor | null>(null)
 
-  const { handleError, isSaved, setIsSaved } = useEditorEvents({ editorRef, monacoInst })
+  const { isSaved, setIsSaved, handleError, handleFormatCode } = useEditorEvents({ editorRef, monacoInst })
+
+  const handleRunCode = () => {
+    runWa()
+    handleError()
+    handleFormatCode()
+    setIsSaved(true)
+  }
 
   useEffect(() => {
     window.__WA_CODE__ = current?.code || ''
-    runWa()
-    handleError()
-    setIsSaved(true)
+    handleRunCode()
   }, [current])
 
   const handleEditorDidMount = (editor: MonacoType.editor.IStandaloneCodeEditor) => {
@@ -38,6 +45,15 @@ export function EditorPane() {
   const handleEditorChange = (value?: string) => {
     setIsSaved(false)
     window.__WA_CODE__ = value || ''
+  }
+
+
+
+  const handleSave = () => {
+    if (editorRef.current) {
+      window.__WA_CODE__ = editorRef.current.getValue()
+      handleRunCode()
+    }
   }
 
   return (
@@ -69,6 +85,14 @@ export function EditorPane() {
             </span>
             <div className={`w-3 h-3 rounded-full ${isSaved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
           </div>
+          {isMobile && (
+            <button
+              onClick={handleSave}
+              className="ml-3 px-3 py-1 text-sm bg-theme text-primary-foreground"
+            >
+              保存
+            </button>
+          )}
         </div>
       </div>
       <div className="h-full w-full">
