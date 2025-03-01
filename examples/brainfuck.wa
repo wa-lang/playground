@@ -7,11 +7,11 @@ func main {
 	vm.Run()
 }
 
-type BrainFuck struct {
-	mem  :[30000]byte
-	code :string
-	pos  :int
-	pc   :int
+type BrainFuck :struct {
+	mem:  [30000]byte
+	code: string
+	pos:  int
+	pc:   int
 }
 
 func NewBrainFuck(code: string) => *BrainFuck {
