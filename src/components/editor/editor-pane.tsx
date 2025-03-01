@@ -1,6 +1,7 @@
 import type * as MonacoType from 'monaco-editor'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useEditorEvents } from '@/hooks/useEditorEvents'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { useWaMonaco } from '@/hooks/useWaMonaco'
 import { runWa } from '@/lib/wawasm'
 import { monacoConfig } from '@/monaco/config'
@@ -9,7 +10,6 @@ import Editor from '@monaco-editor/react'
 import { useEffect, useRef, useState } from 'react'
 import examples from '../../../public/examples.json'
 import { SkeletonCode } from '../skeleton-code'
-import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface ICode {
   name: string
@@ -47,8 +47,6 @@ export function EditorPane() {
     window.__WA_CODE__ = value || ''
   }
 
-
-
   const handleSave = () => {
     if (editorRef.current) {
       window.__WA_CODE__ = editorRef.current.getValue()
@@ -80,34 +78,35 @@ export function EditorPane() {
         </Select>
         <div className="ml-auto flex items-center">
           <div className="flex items-center">
-            {isMobile ? (
+            {!isMobile && (
+              <span className="text-xs mr-3 text-primary/40">
+                {navigator.platform.includes('Mac') ? '⌘+S' : 'Ctrl+S'}
+              </span>
+            )}
             <button
               onClick={handleSave}
-              className="mr-3 px-3 py-1 text-sm bg-theme text-primary-foreground"
+              className="px-3 py-1 text-sm bg-theme text-primary-foreground"
             >
               保存
             </button>
-            ) : (
-              <span className="text-xs mr-3 text-primary/40">
-                {navigator.platform.includes('Mac') ? '⌘+S' : 'Ctrl+S'} 保存
-              </span>
-            )}
-            <div className={`w-3 h-3 rounded-full ${isSaved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
           </div>
         </div>
       </div>
       <div className="h-full w-full">
-        <Editor
-          loading={<SkeletonCode />}
-          language="wa"
-          {...monacoInst}
-          height="100%"
-          theme={monacoTheme}
-          options={monacoConfig}
-          value={current?.code}
-          onMount={handleEditorDidMount}
-          onChange={handleEditorChange}
-        />
+        <div className="h-full w-full relative">
+          <div className={`size-3 absolute top-2 right-4 rounded-full z-10 ${isSaved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+          <Editor
+            loading={<SkeletonCode />}
+            language="wa"
+            {...monacoInst}
+            height="100%"
+            theme={monacoTheme}
+            options={monacoConfig}
+            value={current?.code}
+            onMount={handleEditorDidMount}
+            onChange={handleEditorChange}
+          />
+        </div>
       </div>
     </div>
   )
