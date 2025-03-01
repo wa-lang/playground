@@ -43,15 +43,15 @@ export function PreviewPane() {
 
   return (
     <div className="h-full">
-      <div className="p-2 border-b border-dashed flex gap-2 items-center">
+      <div className="px-2 py-1 border-b border-dashed flex gap-2 items-center">
         {TABS.map(tab => (
           <button
             key={tab.value}
-            className={`p-2 flex gap-2 items-center ${activeTab === tab.value ? 'bg-foreground/5' : ''}`}
+            className={`px-2 py-1 flex gap-2 items-center ${activeTab === tab.value ? 'bg-foreground/5' : ''}`}
             onClick={() => setActiveTab(tab.value)}
           >
             {tab.icon}
-            <span className="text-sm">{tab.label}</span>
+            <span className="text-xs">{tab.label}</span>
           </button>
         ))}
       </div>

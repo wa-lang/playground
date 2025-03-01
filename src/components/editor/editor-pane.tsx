@@ -56,7 +56,7 @@ export function EditorPane() {
 
   return (
     <div className="h-full">
-      <div className="px-4 py-2 border-b border-dashed flex gap-2 items-center">
+      <div className="px-4 py-1 border-b border-dashed flex gap-2 items-center">
         <Select
           value={current?.name}
           onValueChange={(value) => {
@@ -65,7 +65,7 @@ export function EditorPane() {
               setCurrent(selected)
           }}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[180px] py-1 h-7">
             <SelectValue placeholder="Select example" />
           </SelectTrigger>
           <SelectContent>
@@ -85,7 +85,7 @@ export function EditorPane() {
             )}
             <button
               onClick={handleSave}
-              className="px-3 py-1 text-sm bg-theme text-primary-foreground"
+              className="px-3 py-1 text-xs bg-theme text-primary-foreground"
             >
               保存
             </button>
