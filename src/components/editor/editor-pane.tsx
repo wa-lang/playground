@@ -80,19 +80,20 @@ export function EditorPane() {
         </Select>
         <div className="ml-auto flex items-center">
           <div className="flex items-center">
-            <span className="text-xs mr-3 text-primary/40">
-              {navigator.platform.includes('Mac') ? '⌘+S' : 'Ctrl+S'} 保存
-            </span>
-            <div className={`w-3 h-3 rounded-full ${isSaved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
-          </div>
-          {isMobile && (
+            {isMobile ? (
             <button
               onClick={handleSave}
-              className="ml-3 px-3 py-1 text-sm bg-theme text-primary-foreground"
+              className="mr-3 px-3 py-1 text-sm bg-theme text-primary-foreground"
             >
               保存
             </button>
-          )}
+            ) : (
+              <span className="text-xs mr-3 text-primary/40">
+                {navigator.platform.includes('Mac') ? '⌘+S' : 'Ctrl+S'} 保存
+              </span>
+            )}
+            <div className={`w-3 h-3 rounded-full ${isSaved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+          </div>
         </div>
       </div>
       <div className="h-full w-full">
