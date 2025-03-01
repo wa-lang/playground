@@ -1,0 +1,301 @@
+{
+  "name": "wa",
+  "scopeName": "source.wa",
+  "fileTypes": [
+    "wa"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#support"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.wa",
+          "match": "\\b(break|defer|import|struct|case|else|interface|switch|const|for|map|type|continue|func|range|default|global|if|return|make)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "comment": "Types",
+          "name": "storage.type.wa",
+          "match": "\\b(bool|string|error|map)\\b"
+        },
+        {
+          "comment": "Singed Ints",
+          "name": "storage.type.singed.wa",
+          "match": "\\b(int|int8|int16|int32|int64|i8|i16|i32|i64|rune)\\b"
+        },
+        {
+          "comment": "Unsigned Ints",
+          "name": "storage.type.unsigned.wa",
+          "match": "\\b(uint|uint8|uint16|uint32|uint64|u8|u16|u32|u64|uintptr|byte)\\b"
+        },
+        {
+          "comment": "Bool",
+          "name": "storage.type.bool.wa",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "comment": "Floats",
+          "name": "storage.type.floats.wa",
+          "match": "\\b(float32|float64|f32|f64)\\b"
+        },
+        {
+          "comment": "Complex",
+          "name": "storage.type.complex.wa",
+          "match": "\\b(complex64|complex128|c64|c128)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.wa",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "include": "#stringcontent"
+            }
+          ]
+        },
+        {
+          "name": "string.multiline.wa",
+          "begin": "\\\\\\\\",
+          "end": "$"
+        },
+        {
+          "name": "string.quoted.single.wa",
+          "match": "'([^'\\\\]|\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.))'"
+        }
+      ]
+    },
+    "stringcontent": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.wa",
+          "match": "\\\\([nrt'\"\\\\]|(x[0-9a-fA-F]{2})|(u\\{[0-9a-fA-F]+\\}))"
+        },
+        {
+          "name": "invalid.illegal.unrecognized-string-escape.wa",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.wa",
+          "match": "\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?([eE][+-]?[0-9_]+)?\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.wa",
+          "match": "\\b[0-9][0-9_]*\\b"
+        },
+        {
+          "name": "constant.numeric.hexadecimal.wa",
+          "match": "\\b0x[a-fA-F0-9_]+\\b"
+        },
+        {
+          "name": "constant.numeric.octal.wa",
+          "match": "\\b0o[0-7_]+\\b"
+        },
+        {
+          "name": "constant.numeric.binary.wa",
+          "match": "\\b0b[01_]+\\b"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "meta.function.declaration.wa",
+          "patterns": [
+            {
+              "match": "\\b(func)\\s+([A-Z][a-zA-Z0-9]*)\\b",
+              "captures": {
+                "1": {
+                  "name": "storage.type.wa"
+                },
+                "2": {
+                  "name": "entity.name.type.wa"
+                }
+              }
+            },
+            {
+              "match": "\\b(func)\\s+([_a-zA-Z][_a-zA-Z0-9]*)\\b",
+              "captures": {
+                "1": {
+                  "name": "storage.type.wa"
+                },
+                "2": {
+                  "name": "entity.name.function.wa"
+                }
+              }
+            },
+            {
+              "begin": "\\b(func)\\s+",
+              "end": "\"",
+              "name": "entity.name.function.wa",
+              "beginCaptures": {
+                "1": {
+                  "name": "storage.type.wa"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#stringcontent"
+                }
+              ]
+            },
+            {
+              "name": "storage.type.wa",
+              "match": "\\b(const|func)\\b"
+            }
+          ]
+        },
+        {
+          "name": "meta.function.call.wa",
+          "patterns": [
+            {
+              "match": "([A-Z][a-zA-Z0-9]*)(?=\\s*\\{)",
+              "name": "entity.name.function.wa"
+            },
+            {
+              "match": "([A-Z][a-zA-Z0-9]*)(?=\\s*\\()",
+              "name": "entity.name.function.wa"
+            },
+            {
+              "match": "([_a-zA-Z][_a-zA-Z0-9]*)(?=\\s*\\{)",
+              "name": "entity.name.function.wa"
+            },
+            {
+              "match": "([_a-zA-Z][_a-zA-Z0-9]*)(?=\\s*\\()",
+              "name": "entity.name.function.wa"
+            },
+            {
+              "match": "([\\u4e00-\\u9fa5]+)(?=\\s*\\()",
+              "name": "entity.name.function.wa"
+            }
+          ]
+        },
+        {
+          "name": "meta.variable.wa",
+          "patterns": [
+            {
+              "match": "\\b[_A-Z][_A-Z0-9]+\\b",
+              "name": "variable.constant.wa"
+            },
+            {
+              "match": "\\b[_a-zA-Z][_a-zA-Z0-9]*_t\\b",
+              "name": "entity.name.type.wa"
+            },
+            {
+              "match": "\\b[A-Z][a-zA-Z0-9]*\\b",
+              "name": "entity.name.type.wa"
+            },
+            {
+              "match": "\\b[_a-zA-Z][_a-zA-Z0-9]*\\b",
+              "name": "variable.other.wa"
+            }
+          ]
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.wa",
+          "match": "(==|!=|<=|>=|<|>)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.wa",
+          "match": "((\\+|-|\\*|/|\\%)=?)|(\\+\\+|--)"
+        },
+        {
+          "name": "keyword.operator.logical.wa",
+          "match": "(!|&&|\\|\\|)"
+        },
+        {
+          "name": "keyword.operator.assignment.wa",
+          "match": "(:=|=>|=)"
+        },
+        {
+          "name": "keyword.operator.bitwise.wa",
+          "match": "((<<|>>|&|&\\^|\\^|\\|)=?)"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.wa",
+          "begin": "//",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.wa"
+            }
+          },
+          "end": "$"
+        },
+        {
+          "name": "comment.block.documentation.wa",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.wa"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.end.wa"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#comments"
+            }
+          ]
+        }
+      ]
+    },
+    "commentContents": {
+      "patterns": [
+        {
+          "match": "\\b(TODO|FIXME|NOTE|INFO|IDEA|CHANGED|BUG|HACK)\\b:?",
+          "name": "comment.line.todo.wa"
+        }
+      ]
+    },
+    "support": {
+      "patterns": []
+    }
+  }
+}
