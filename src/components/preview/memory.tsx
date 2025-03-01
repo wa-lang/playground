@@ -51,18 +51,29 @@ const MemoryHex = memo<{
   selectedRow: number | null
   selectedCol: number | null
   onCellClick: (row: number, col: number) => void
-}>(({ hex, rowIndex, selectedRow, selectedCol, onCellClick }) => (
-      <div className="border-r px-2 py-1 flex gap-1 *:flex-1">
-        {hex.split(' ').map((hex, hexIndex) => (
-          <MemoryCell
-            key={hexIndex}
-            content={hex.toUpperCase()}
-            isSelected={selectedRow === rowIndex && selectedCol === hexIndex}
-            onClick={() => onCellClick(rowIndex, hexIndex)}
-          />
-        ))}
-      </div>
-    ))
+}>(({ hex, rowIndex, selectedRow, selectedCol, onCellClick }) => {
+      const hexValues = useMemo(() => hex.split(' '), [hex])
+
+      return (
+        <div className="border-r px-2 py-1 flex gap-1 *:flex-1">
+          {hexValues.map((hexValue, hexIndex) => {
+            const isSelected = selectedRow === rowIndex && selectedCol === hexIndex
+            const handleClick = useCallback(() => {
+              onCellClick(rowIndex, hexIndex)
+            }, [rowIndex, hexIndex, onCellClick])
+
+            return (
+              <MemoryCell
+                key={hexIndex}
+                content={hexValue.toUpperCase()}
+                isSelected={isSelected}
+                onClick={handleClick}
+              />
+            )
+          })}
+        </div>
+      )
+    })
 
 const MemoryAscii = memo<{
   ascii: string
@@ -70,18 +81,29 @@ const MemoryAscii = memo<{
   selectedRow: number | null
   selectedCol: number | null
   onCellClick: (row: number, col: number) => void
-}>(({ ascii, rowIndex, selectedRow, selectedCol, onCellClick }) => (
-      <div className="w-28 px-2 py-1 text-muted-foreground flex gap-1">
-        {ascii.split('').map((char, charIndex) => (
-          <MemoryCell
-            key={charIndex}
-            content={char}
-            isSelected={selectedRow === rowIndex && selectedCol === charIndex}
-            onClick={() => onCellClick(rowIndex, charIndex)}
-          />
-        ))}
-      </div>
-    ))
+}>(({ ascii, rowIndex, selectedRow, selectedCol, onCellClick }) => {
+      const asciiChars = useMemo(() => ascii.split(''), [ascii])
+
+      return (
+        <div className="w-28 px-2 py-1 text-muted-foreground flex gap-1">
+          {asciiChars.map((char, charIndex) => {
+            const isSelected = selectedRow === rowIndex && selectedCol === charIndex
+            const handleClick = useCallback(() => {
+              onCellClick(rowIndex, charIndex)
+            }, [rowIndex, charIndex, onCellClick])
+
+            return (
+              <MemoryCell
+                key={charIndex}
+                content={char}
+                isSelected={isSelected}
+                onClick={handleClick}
+              />
+            )
+          })}
+        </div>
+      )
+    })
 
 const MemoryRow = memo<{
   item: IMemoryItem
@@ -110,7 +132,18 @@ const MemoryRow = memo<{
           onCellClick={onCellClick}
         />
       </div>
-    ))
+    ), (prevProps, nextProps) => {
+      return (
+        prevProps.item === nextProps.item
+        && prevProps.rowIndex === nextProps.rowIndex
+        && (prevProps.selectedRow === nextProps.selectedRow
+          || (prevProps.rowIndex !== prevProps.selectedRow && nextProps.rowIndex !== nextProps.selectedRow))
+        && (prevProps.selectedCol === nextProps.selectedCol
+          || prevProps.rowIndex !== prevProps.selectedRow
+          || nextProps.rowIndex !== nextProps.selectedRow)
+        && prevProps.onCellClick === nextProps.onCellClick
+      )
+    })
 
 export const MemoryPreview: FC = () => {
   const [memory, setMemory] = useState<IMemoryItem[]>([])
@@ -137,8 +170,8 @@ export const MemoryPreview: FC = () => {
   }, [])
 
   const handleCellClick = useCallback((row: number, col: number) => {
-    setSelectedRow(prev => prev === row ? row : row)
-    setSelectedCol(prev => prev === col ? col : col)
+    setSelectedRow(prev => prev === row ? prev : row)
+    setSelectedCol(prev => prev === col ? prev : col)
   }, [])
 
   const getValueAtSelection = useCallback(() => {
@@ -162,7 +195,7 @@ export const MemoryPreview: FC = () => {
     return `0x${address.toString(16).padStart(8, '0').toUpperCase()}`
   }, [selectedRow, selectedCol])
 
-  const formatValue = (type: string, value: number | bigint | null) => {
+  const formatValue = useCallback((type: string, value: number | bigint | null) => {
     if (value === null)
       return 'N/A'
 
@@ -187,7 +220,20 @@ export const MemoryPreview: FC = () => {
       case 'oct': return `${value.toString(8)}`
       default: return value.toString()
     }
-  }
+  }, [numberFormats])
+
+  const memoryRows = useMemo(() => {
+    return memory.map((item, rowIndex) => (
+      <MemoryRow
+        key={rowIndex}
+        item={item}
+        rowIndex={rowIndex}
+        selectedRow={selectedRow}
+        selectedCol={selectedCol}
+        onCellClick={handleCellClick}
+      />
+    ))
+  }, [memory, selectedRow, selectedCol, handleCellClick])
 
   return (
     <div className="flex h-full w-full">
@@ -196,16 +242,7 @@ export const MemoryPreview: FC = () => {
           <span className="text-center">{currentAddress}</span>
         </div>
         <div className="flex-1 overflow-auto mb-10 ">
-          {memory.map((item, rowIndex) => (
-            <MemoryRow
-              key={rowIndex}
-              item={item}
-              rowIndex={rowIndex}
-              selectedRow={selectedRow}
-              selectedCol={selectedCol}
-              onCellClick={handleCellClick}
-            />
-          ))}
+          {memoryRows}
         </div>
       </div>
 
