@@ -51,7 +51,7 @@ export function PreviewPane() {
             onClick={() => setActiveTab(tab.value)}
           >
             {tab.icon}
-            <span className="text-xs">{tab.label}</span>
+            <span className="text-sm">{tab.label}</span>
           </button>
         ))}
       </div>

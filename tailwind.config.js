@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['DM Mono', 'monospace'],
+        mono: ['RobotoMono', 'monospace'],
         sans: ['system-ui', 'sans-serif'],
       },
       borderRadius: {

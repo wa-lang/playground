@@ -85,7 +85,7 @@ export function EditorPane() {
             )}
             <button
               onClick={handleSave}
-              className="px-3 py-1 text-xs bg-theme text-primary-foreground"
+              className="px-3 py-1 text-sm bg-theme text-primary-foreground"
             >
               保存
             </button>

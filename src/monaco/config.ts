@@ -8,7 +8,7 @@ export const monacoConfig = {
   folding: true,
   lineDecorationsWidth: 10,
   lineNumbersMinChars: 3,
-  fontFamily: 'DM Mono, monospace',
+  fontFamily: 'RobotoMono, monospace',
   minimap: { enabled: false },
   padding: {
     top: 8,
