@@ -70,7 +70,11 @@ export function EditorPane() {
           </SelectTrigger>
           <SelectContent>
             {examples.map(example => (
-              <SelectItem key={example.name} value={example.name}>
+              <SelectItem
+                className="h-7"
+                key={example.name}
+                value={example.name}
+              >
                 {example.name}
               </SelectItem>
             ))}
