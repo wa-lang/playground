@@ -1,7 +1,7 @@
 [
   {
     "name": "hello",
-    "code": "// 版权 @2019 凹语言 作者。保留所有权利。\n\nimport \"fmt\"\nimport \"runtime\"\n\nfunc main {\n\tprintln(\"你好，凹语言！\", runtime.WAOS)\n\tprintln(add(40, 2))\n\n\tfmt.Println(1+1)\n}\n\nfunc add(a: i32, b: i32) => i32 {\n\treturn a+b\n}"
+    "code": "// 版权 @2019 凹语言 作者。保留所有权利。\n\nimport \"fmt\"\nimport \"runtime\"\n\nfunc main {\n\tprintln(\"你好，凹语言！\", runtime.WAOS)\n\tprintln(add(40, 2))\n\n\tfmt.Println(1 + 1)\n}\n\nfunc add(a: i32, b: i32) => i32 {\n\treturn a + b\n}\n"
   },
   {
     "name": "count",
@@ -13,15 +13,15 @@
   },
   {
     "name": "brainfuck",
-    "code": "// 版权 @2019 凹语言 作者。保留所有权利。\n\nfunc main {\n\t// print hi\n\tconst code = \"++++++++++[>++++++++++<-]>++++.+.\"\n\tvm := NewBrainFuck(code)\n\tvm.Run()\n}\n\ntype BrainFuck struct {\n\tmem  :[30000]byte\n\tcode :string\n\tpos  :int\n\tpc   :int\n}\n\nfunc NewBrainFuck(code: string) => *BrainFuck {\n\treturn &BrainFuck{code: code}\n}\n\nfunc BrainFuck.Run {\n\tfor ; this.pc != len(this.code); this.pc++ {\n\t\tswitch x := this.code[this.pc]; x {\n\t\tcase '>':\n\t\t\tthis.pos++\n\t\tcase '<':\n\t\t\tthis.pos--\n\t\tcase '+':\n\t\t\tthis.mem[this.pos]++\n\t\tcase '-':\n\t\t\tthis.mem[this.pos]--\n\t\tcase '[':\n\t\t\tif this.mem[this.pos] == 0 {\n\t\t\t\tthis.loop(1)\n\t\t\t}\n\t\tcase ']':\n\t\t\tif this.mem[this.pos] != 0 {\n\t\t\t\tthis.loop(-1)\n\t\t\t}\n\t\tcase '.':\n\t\t\tprint(rune(this.mem[this.pos]))\n\t\tcase ',':\n\t\t\t// TODO: support read byte\n\t\t}\n\t}\n\treturn\n}\n\nfunc BrainFuck.loop(inc: int) {\n\tfor i := inc; i != 0; this.pc += inc {\n\t\tswitch this.code[this.pc+inc] {\n\t\tcase '[':\n\t\t\ti++\n\t\tcase ']':\n\t\t\ti--\n\t\t}\n\t}\n}\n"
+    "code": "// 版权 @2019 凹语言 作者。保留所有权利。\n\nfunc main {\n\t// print hi\n\tconst code = \"++++++++++[>++++++++++<-]>++++.+.\"\n\tvm := NewBrainFuck(code)\n\tvm.Run()\n}\n\ntype BrainFuck :struct {\n\tmem:  [30000]byte\n\tcode: string\n\tpos:  int\n\tpc:   int\n}\n\nfunc NewBrainFuck(code: string) => *BrainFuck {\n\treturn &BrainFuck{code: code}\n}\n\nfunc BrainFuck.Run {\n\tfor ; this.pc != len(this.code); this.pc++ {\n\t\tswitch x := this.code[this.pc]; x {\n\t\tcase '>':\n\t\t\tthis.pos++\n\t\tcase '<':\n\t\t\tthis.pos--\n\t\tcase '+':\n\t\t\tthis.mem[this.pos]++\n\t\tcase '-':\n\t\t\tthis.mem[this.pos]--\n\t\tcase '[':\n\t\t\tif this.mem[this.pos] == 0 {\n\t\t\t\tthis.loop(1)\n\t\t\t}\n\t\tcase ']':\n\t\t\tif this.mem[this.pos] != 0 {\n\t\t\t\tthis.loop(-1)\n\t\t\t}\n\t\tcase '.':\n\t\t\tprint(rune(this.mem[this.pos]))\n\t\tcase ',':\n\t\t\t// TODO: support read byte\n\t\t}\n\t}\n\treturn\n}\n\nfunc BrainFuck.loop(inc: int) {\n\tfor i := inc; i != 0; this.pc += inc {\n\t\tswitch this.code[this.pc+inc] {\n\t\tcase '[':\n\t\t\ti++\n\t\tcase ']':\n\t\t\ti--\n\t\t}\n\t}\n}\n"
   },
   {
     "name": "closure",
-    "code": "// 版权 @2019 凹语言 作者。保留所有权利。\n\ntype FP func(i: i32) => i32\n\ntype ST struct {\n\ti :i32\n}\n\nfunc ST.meth(p: i32) => i32 {\n\tthis.i += p\n\treturn this.i\n}\n\nglobal g_f: FP\n\nfunc main {\n\to: ST\n\to.i = 11\n\tg_f = o.meth\n\tprintln(g_f(11)) // 22\n\tprintln(o.i)     // 22\n\n\tn := i32(21)\n\tg_f = func(i: i32) => i32 {\n\t\tn += i\n\t\treturn n\n\t}\n\tprintln(g_f(22)) // 43\n\tprintln(n)       // 43\n\n\tfunc(i: i32) {\n\t\tn += i\n\t}(22)\n\tprintln(n) // 65\n\n\tg_f = Double\n\tprintln(g_f(13)) // 26\n}\n\nfunc Double(i: i32) => i32 {\n\treturn i * 2\n}\n"
+    "code": "// 版权 @2019 凹语言 作者。保留所有权利。\n\ntype FP :func(i: i32) => i32\n\ntype ST :struct {\n\ti: i32\n}\n\nfunc ST.meth(p: i32) => i32 {\n\tthis.i += p\n\treturn this.i\n}\n\nglobal g_f: FP\n\nfunc main {\n\to: ST\n\to.i = 11\n\tg_f = o.meth\n\tprintln(g_f(11)) // 22\n\tprintln(o.i)     // 22\n\n\tn := i32(21)\n\tg_f = func(i: i32) => i32 {\n\t\tn += i\n\t\treturn n\n\t}\n\tprintln(g_f(22)) // 43\n\tprintln(n)       // 43\n\n\tfunc(i: i32) {\n\t\tn += i\n\t}(22)\n\tprintln(n) // 65\n\n\tg_f = Double\n\tprintln(g_f(13)) // 26\n}\n\nfunc Double(i: i32) => i32 {\n\treturn i * 2\n}\n"
   },
   {
     "name": "iface",
-    "code": "// 版权 @2021 凹语言 作者。保留所有权利。\n\ntype S1 struct {\n\ta: i32\n}\n\ntype S2 struct {\n\ta: i32\n}\n\ntype i1 interface {\n\tf()\n}\n\nfunc S1.f {\n\tprintln(\"This is S1, this.a==\", this.a)\n}\n\nfunc S2.f {\n\tprintln(\"This is S2, this.a==\", this.a)\n}\n\nfunc main {\n\tv1 := S1{a: 13}\n\tv2 := S2{a: 42}\n\n\ti: i1 = &v1\n\ti.f()\n\n\ti = &v2\n\ti.f()\n}\n"
+    "code": "// 版权 @2021 凹语言 作者。保留所有权利。\n\ntype S1 :struct {\n\ta: i32\n}\n\ntype S2 :struct {\n\ta: i32\n}\n\ntype i1 :interface {\n\tf()\n}\n\nfunc S1.f {\n\tprintln(\"This is S1, this.a==\", this.a)\n}\n\nfunc S2.f {\n\tprintln(\"This is S2, this.a==\", this.a)\n}\n\nfunc main {\n\tv1 := S1{a: 13}\n\tv2 := S2{a: 42}\n\n\ti: i1 = &v1\n\ti.f()\n\n\ti = &v2\n\ti.f()\n}\n"
   },
   {
     "name": "map",
@@ -29,11 +29,11 @@
   },
   {
     "name": "defer",
-    "code": "// 版权 @2024 凹语言 作者。保留所有权利。\n\nfunc main {\n\tdefer println(\"a1\")\n\tdefer println(\"a2\")\n\tprintln(\"a3\")\n\n\tfor i := 0; i < 3; i++ {\n\t\tdefer println(\"i.v0:\", i)\n\t}\n\n\tfor i := 0; i < 3; i++ {\n\t\tdefer func { println(\"i.v1:\", i) } ()\n\t}\n}\n"
+    "code": "// 版权 @2024 凹语言 作者。保留所有权利。\n\nfunc main {\n\tdefer println(\"a1\")\n\tdefer println(\"a2\")\n\tprintln(\"a3\")\n\n\tfor i := 0; i < 3; i++ {\n\t\tdefer println(\"i.v0:\", i)\n\t}\n\n\tfor i := 0; i < 3; i++ {\n\t\tdefer func { println(\"i.v1:\", i) }()\n\t}\n}\n"
   },
   {
     "name": "complex",
-    "code": "// 版权 @2024 凹语言 作者。保留所有权利。\n\nfunc main {\n\tx: complex128 = complex(1, 2) // 1+2i\n\ty: complex128 = complex(3, 4) // 3+4i\n\tprintln(x*y)                  // \"(-5+10i)\"\n\tprintln(real(x*y))            // \"-5\"\n\tprintln(imag(x*y))            // \"10\"\n}\n"
+    "code": "// 版权 @2024 凹语言 作者。保留所有权利。\n\nfunc main {\n\tx: complex128 = complex(1, 2) // 1+2i\n\ty: complex128 = complex(3, 4) // 3+4i\n\tprintln(x * y)                // \"(-5+10i)\"\n\tprintln(real(x * y))          // \"-5\"\n\tprintln(imag(x * y))          // \"10\"\n}\n"
   },
   {
     "name": "hello-zh",

@@ -61,7 +61,20 @@ export function EditorPane() {
     window.__WA_CODE__ = value || ''
     runWa()
     handleError()
-  }, 200)
+  }, 500)
+
+  const handleFormatCode = useDebounce(() => {
+    if (window.__WA_FMT_CODE__ && editorRef.current) {
+      const selection = editorRef.current.getSelection()
+
+      editorRef.current.setValue(window.__WA_FMT_CODE__)
+
+      if (selection) {
+        editorRef.current.setSelection(selection)
+        editorRef.current.revealPositionInCenter(selection.getPosition())
+      }
+    }
+  }, 3000)
 
   useEffect(() => {
     window.__WA_CODE__ = current?.code || ''
@@ -71,6 +84,11 @@ export function EditorPane() {
 
   const handleEditorDidMount = (editor: MonacoType.editor.IStandaloneCodeEditor) => {
     editorRef.current = editor
+  }
+
+  const handleEditorChange = (value?: string) => {
+    handleRunWaCode(value)
+    handleFormatCode()
   }
 
   return (
@@ -106,7 +124,7 @@ export function EditorPane() {
           options={monacoConfig}
           value={current?.code}
           onMount={handleEditorDidMount}
-          onChange={handleRunWaCode}
+          onChange={handleEditorChange}
         />
       </div>
     </div>

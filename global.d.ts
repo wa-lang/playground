@@ -11,6 +11,7 @@ declare global {
     __WA_CODE__: string
     __WA_PRINT__: string
     __WA_ERROR__: string
+    __WA_FMT_CODE__: string
     __WA_APP__: {
       getString: (ptr: number, len: number) => string
       init: (wasmInst: any) => void
