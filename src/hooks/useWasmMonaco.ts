@@ -1,14 +1,11 @@
-import { registerEditorActions } from '@/monaco/actions'
 import { langConfig } from '@/monaco/config'
-import { registerHoverProvider } from '@/monaco/hovers'
 import { getShiki } from '@/monaco/shiki'
-import { registerLangSuggestions } from '@/monaco/suggestions'
 import { useConfigStore } from '@/stores/config'
 import { useMonaco } from '@monaco-editor/react'
 import { shikiToMonaco } from '@shikijs/monaco'
 import { useEffect } from 'react'
 
-export function useWaMonaco() {
+export function useWasmMonaco() {
   const { theme } = useConfigStore()
   const monaco = useMonaco()
 
@@ -21,13 +18,10 @@ export function useWaMonaco() {
     if (!monaco)
       return
 
-    monaco.languages.register({ id: 'wa' })
-    monaco.languages.setLanguageConfiguration('wa', langConfig)
+    monaco.languages.register({ id: 'wasm' })
+    monaco.languages.setLanguageConfiguration('wasm', langConfig)
 
     registerLangHighlighter(monaco as unknown as typeof useMonaco)
-    registerLangSuggestions(monaco)
-    registerHoverProvider(monaco)
-    registerEditorActions(monaco)
   }, [monaco])
 
   return monaco

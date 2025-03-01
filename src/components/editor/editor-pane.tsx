@@ -1,6 +1,6 @@
 import type * as MonacoType from 'monaco-editor'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { useDebounce } from '@/hooks/useDebounce'
+import { useEditorEvents } from '@/hooks/useEditorEvents'
 import { useWaMonaco } from '@/hooks/useWaMonaco'
 import { runWa } from '@/lib/wawasm'
 import { monacoConfig } from '@/monaco/config'
@@ -22,59 +22,7 @@ export function EditorPane() {
   const monacoTheme = theme === 'dark' ? 'vitesse-dark' : 'vitesse-light'
   const editorRef = useRef<MonacoType.editor.IStandaloneCodeEditor | null>(null)
 
-  const handleError = () => {
-    if (!editorRef.current || !monacoInst)
-      return
-
-    const model = editorRef.current.getModel()
-    if (!model)
-      return
-
-    const errorStr = window.__WA_ERROR__ as string
-
-    if (!errorStr || errorStr === '') {
-      monacoInst.editor.setModelMarkers(model, 'wa', [])
-      return
-    }
-
-    const match = errorStr.match(/(.+):(\d+):(\d+):\s*(.+)/)
-
-    if (match) {
-      const [, _file, line, column, message] = match
-      const lineNumber = Number.parseInt(line)
-      const columnNumber = Number.parseInt(column)
-
-      const markers: MonacoType.editor.IMarkerData[] = [{
-        severity: monacoInst.MarkerSeverity.Error,
-        message,
-        startLineNumber: lineNumber,
-        startColumn: columnNumber,
-        endLineNumber: lineNumber,
-        endColumn: columnNumber + 1,
-      }]
-
-      monacoInst.editor.setModelMarkers(model, 'wa', markers)
-    }
-  }
-
-  const handleRunWaCode = useDebounce((value?: string) => {
-    window.__WA_CODE__ = value || ''
-    runWa()
-    handleError()
-  }, 500)
-
-  const handleFormatCode = useDebounce(() => {
-    if (window.__WA_FMT_CODE__ && editorRef.current) {
-      const selection = editorRef.current.getSelection()
-
-      editorRef.current.setValue(window.__WA_FMT_CODE__)
-
-      if (selection) {
-        editorRef.current.setSelection(selection)
-        editorRef.current.revealPositionInCenter(selection.getPosition())
-      }
-    }
-  }, 3000)
+  const { handleError } = useEditorEvents({ editorRef, monacoInst })
 
   useEffect(() => {
     window.__WA_CODE__ = current?.code || ''
@@ -84,11 +32,6 @@ export function EditorPane() {
 
   const handleEditorDidMount = (editor: MonacoType.editor.IStandaloneCodeEditor) => {
     editorRef.current = editor
-  }
-
-  const handleEditorChange = (value?: string) => {
-    handleRunWaCode(value)
-    handleFormatCode()
   }
 
   return (
@@ -124,7 +67,6 @@ export function EditorPane() {
           options={monacoConfig}
           value={current?.code}
           onMount={handleEditorDidMount}
-          onChange={handleEditorChange}
         />
       </div>
     </div>

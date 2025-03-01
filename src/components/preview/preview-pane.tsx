@@ -1,4 +1,4 @@
-import { useWaMonaco } from '@/hooks/useWaMonaco'
+import { useWasmMonaco } from '@/hooks/useWasmMonaco'
 import { initWaWasm } from '@/lib/wawasm'
 import { useConfigStore } from '@/stores/config'
 import { useWasmStore } from '@/stores/wasm'
@@ -32,7 +32,7 @@ export function PreviewPane() {
   const [activeTab, setActiveTab] = useState<'output' | 'wat' | 'memory'>('output')
   const { output, wat } = useWasmStore()
 
-  const monaco = useWaMonaco()
+  const monaco = useWasmMonaco()
   const { theme } = useConfigStore()
 
   useEffect(() => {
