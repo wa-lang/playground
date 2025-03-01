@@ -10,7 +10,7 @@ type TWasmInst = WebAssembly.Instance & {
 }
 
 const zip = new JSZip()
-const WASM_ZIP_URL = '/wa.wasm.zip'
+const WASM_ZIP_URL = 'https://wa-lang.org/wa/wa-js/wa.wasm.zip'
 
 export async function initWaWasm() {
   const { wasmInst, go, actions } = useWasmStore.getState()
