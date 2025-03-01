@@ -22,16 +22,22 @@ export function EditorPane() {
   const monacoTheme = theme === 'dark' ? 'vitesse-dark' : 'vitesse-light'
   const editorRef = useRef<MonacoType.editor.IStandaloneCodeEditor | null>(null)
 
-  const { handleError } = useEditorEvents({ editorRef, monacoInst })
+  const { handleError, isSaved, setIsSaved } = useEditorEvents({ editorRef, monacoInst })
 
   useEffect(() => {
     window.__WA_CODE__ = current?.code || ''
     runWa()
     handleError()
+    setIsSaved(true)
   }, [current])
 
   const handleEditorDidMount = (editor: MonacoType.editor.IStandaloneCodeEditor) => {
     editorRef.current = editor
+  }
+
+  const handleEditorChange = (value?: string) => {
+    setIsSaved(false)
+    window.__WA_CODE__ = value || ''
   }
 
   return (
@@ -56,6 +62,14 @@ export function EditorPane() {
             ))}
           </SelectContent>
         </Select>
+        <div className="ml-auto flex items-center">
+          <div className="flex items-center">
+            <span className="text-xs mr-3 text-primary/40">
+              {navigator.platform.includes('Mac') ? '⌘+S' : 'Ctrl+S'} 保存
+            </span>
+            <div className={`w-3 h-3 rounded-full ${isSaved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
+          </div>
+        </div>
       </div>
       <div className="h-full w-full">
         <Editor
@@ -67,6 +81,7 @@ export function EditorPane() {
           options={monacoConfig}
           value={current?.code}
           onMount={handleEditorDidMount}
+          onChange={handleEditorChange}
         />
       </div>
     </div>

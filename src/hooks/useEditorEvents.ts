@@ -1,6 +1,6 @@
 import type * as MonacoType from 'monaco-editor'
 import { runWa } from '@/lib/wawasm'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface EditorEventsProps {
   editorRef: React.RefObject<MonacoType.editor.IStandaloneCodeEditor | null>
@@ -11,6 +11,8 @@ export function useEditorEvents({
   editorRef,
   monacoInst,
 }: EditorEventsProps) {
+  const [isSaved, setIsSaved] = useState(true)
+
   const handleError = () => {
     if (!editorRef.current || !monacoInst)
       return
@@ -147,6 +149,7 @@ export function useEditorEvents({
   const handleSaveEvent = (event: CustomEvent) => {
     const { value } = event.detail
     handleRunWaCode(value)
+    setIsSaved(true)
   }
 
   const handleToggleCommentEvent = (event: CustomEvent) => {
@@ -168,5 +171,7 @@ export function useEditorEvents({
     handleRunWaCode,
     handleFormatCode,
     handleToggleComment,
+    isSaved,
+    setIsSaved,
   }
 }
