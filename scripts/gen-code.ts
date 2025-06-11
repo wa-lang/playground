@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const VALID_EXTENSIONS = ['.wa', '.wz']
-const DEFAULT_ORDER = ['hello', 'count', 'heart', 'brainfuck', 'closure', 'iface', 'map', 'defer', 'complex', 'hello-wz']
+const DEFAULT_ORDER = ['hello', 'count', 'heart', 'brainfuck', 'closure', 'iface', 'map', 'defer', 'complex', 'iter', 'hello-wz']
 const EXAMPLES_DIR = path.resolve(__dirname, '../examples')
 const OUTPUT_PATH = path.resolve(__dirname, '../public/examples.json')
 
