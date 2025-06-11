@@ -36,6 +36,10 @@
     "code": "// 版权 @2024 凹语言 作者。保留所有权利。\n\nfunc main {\n\tx: complex128 = complex(1, 2) // 1+2i\n\ty: complex128 = complex(3, 4) // 3+4i\n\tprintln(x * y)                // \"(-5+10i)\"\n\tprintln(real(x * y))          // \"-5\"\n\tprintln(imag(x * y))          // \"10\"\n}\n"
   },
   {
+    "name": "iter",
+    "code": "type MyObject :struct {\n\telems: []string\n}\n\nfunc New(a: ...string) => *MyObject {\n\treturn &MyObject{elems: a}\n}\n\nfunc MyObject.Iter => func => (ok: bool, k: int, v: string) {\n\tidx: int\n\treturn func => (ok: bool, k: int, v: string) {\n\t\tif ok = idx < len(this.elems); ok {\n\t\t\tk, v = idx, this.elems[idx]\n\t\t\tidx++\n\t\t}\n\t\treturn\n\t}\n}\n\nfunc main {\n\tfor i, v := range New(\"aa\", \"bb\", \"cc\").Iter() {\n\t\tprintln(i, v)\n\t}\n}\n"
+  },
+  {
     "name": "hello-zh",
     "code": "// 版权 @2022 _examples/hello-zh 作者。保留所有权利。\n\n#syntax=wz\n\n引于 \"书\"\n\n【启】：\n  书·说：\"你好，凹语言中文版！\"\n。\n"
   }
