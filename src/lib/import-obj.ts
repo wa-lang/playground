@@ -52,6 +52,10 @@ const importsObject = {
       window.__WA_PRINT__ += s
     }
 
+    this.print_position = (i: number): void => {
+      window.__WA_PRINT__ += i
+    }
+
     this.proc_exit = (_i: number): void => {
       // exit(i);
     }

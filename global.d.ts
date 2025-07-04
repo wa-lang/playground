@@ -29,6 +29,7 @@ declare global {
     print_f64: (i: number) => void
     print_rune: (c: number) => void
     print_str: (ptr: number, len: number) => void
+    print_position: (v: number) => void
     proc_exit: (i: number) => void
   }
 }
