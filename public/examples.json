@@ -41,6 +41,6 @@
   },
   {
     "name": "hello-zh",
-    "code": "// 版权 @2022 _examples/hello-zh 作者。保留所有权利。\n\n#syntax=wz\n\n引于 \"书\"\n\n【启】：\n  书·说：\"你好，凹语言中文版！\"\n。\n"
+    "code": "// 版权 @2025 _examples/hello-zh 作者。保留所有权利。\n\n#syntax=wz\n\n引入 \"书\"\n\n函数 主控:\n    书·说(\"你好，凹语言中文版！\")\n完毕\n"
   }
 ]
