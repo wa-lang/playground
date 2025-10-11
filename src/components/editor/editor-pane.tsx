@@ -24,6 +24,15 @@ export function EditorPane() {
   const monacoTheme = theme === 'dark' ? 'vitesse-dark' : 'vitesse-light'
   const editorRef = useRef<MonacoType.editor.IStandaloneCodeEditor | null>(null)
 
+  const detectLanguage = (filename: string) => {
+    if (filename.endsWith('.wz')) {
+      return 'wz'
+    }
+    return 'wa'
+  }
+
+  const currentLanguage = detectLanguage(current?.name || '')
+
   const { isSaved, setIsSaved, handleError, handleFormatCode } = useEditorEvents({ editorRef, monacoInst })
 
   const handleRunCode = () => {
@@ -101,7 +110,7 @@ export function EditorPane() {
           <div className={`size-3 absolute top-2 right-4 rounded-full z-10 ${isSaved ? 'bg-green-500' : 'bg-yellow-500'}`}></div>
           <Editor
             loading={<SkeletonCode />}
-            language="wa"
+            language={currentLanguage}
             {...monacoInst}
             height="100%"
             theme={monacoTheme}

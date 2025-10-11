@@ -2,14 +2,19 @@ import type * as Monaco from 'monaco-editor'
 import { LANG_BOOL, LANG_KEYWORDS, LANG_SNIPPETS, LANG_TYPES } from '@/constants/lang'
 
 export function registerLangSuggestions(monaco: typeof Monaco) {
-  monaco.languages.registerCompletionItemProvider('wa', {
+  const completionProvider: Monaco.languages.CompletionItemProvider = {
     triggerCharacters: ['.'],
-    provideCompletionItems: (model, post, _context, _token) => {
-      const wordInfo = model.getWordUntilPosition(post)
+    provideCompletionItems: (
+      model: Monaco.editor.ITextModel,
+      position: Monaco.Position,
+      _context: Monaco.languages.CompletionContext,
+      _token: Monaco.CancellationToken,
+    ) => {
+      const wordInfo = model.getWordUntilPosition(position)
       const wordRange = new monaco.Range(
-        post.lineNumber,
+        position.lineNumber,
         wordInfo.startColumn,
-        post.lineNumber,
+        position.lineNumber,
         wordInfo.endColumn,
       )
 
@@ -58,5 +63,8 @@ export function registerLangSuggestions(monaco: typeof Monaco) {
 
       return { suggestions }
     },
-  })
+  }
+
+  monaco.languages.registerCompletionItemProvider('wa', completionProvider)
+  monaco.languages.registerCompletionItemProvider('wz', completionProvider)
 }

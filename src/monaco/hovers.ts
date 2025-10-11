@@ -2,8 +2,8 @@ import type * as Monaco from 'monaco-editor'
 import { LANG_BOOL, LANG_KEYWORDS, LANG_TYPES } from '@/constants/lang'
 
 export function registerHoverProvider(monaco: typeof Monaco) {
-  monaco.languages.registerHoverProvider('wa', {
-    provideHover: (model, pos) => {
+  const hoverProvider: Monaco.languages.HoverProvider = {
+    provideHover: (model: Monaco.editor.ITextModel, pos: Monaco.IPosition) => {
       const word = model.getWordAtPosition(pos)
       if (!word)
         return null
@@ -51,5 +51,8 @@ export function registerHoverProvider(monaco: typeof Monaco) {
 
       return null
     },
-  })
+  }
+
+  monaco.languages.registerHoverProvider('wa', hoverProvider)
+  monaco.languages.registerHoverProvider('wz', hoverProvider)
 }

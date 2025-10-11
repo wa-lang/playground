@@ -24,6 +24,9 @@ export function useWaMonaco() {
     monaco.languages.register({ id: 'wa' })
     monaco.languages.setLanguageConfiguration('wa', langConfig)
 
+    monaco.languages.register({ id: 'wz' })
+    monaco.languages.setLanguageConfiguration('wz', langConfig)
+
     registerLangHighlighter(monaco as unknown as typeof useMonaco)
     registerLangSuggestions(monaco)
     registerHoverProvider(monaco)

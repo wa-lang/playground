@@ -10,8 +10,8 @@ interface IExample {
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const VALID_EXTENSIONS = ['.wa', '.wz']
-const DEFAULT_ORDER = ['hello', 'count', 'heart', 'brainfuck', 'closure', 'iface', 'map', 'defer', 'complex', 'iter', 'hello-wz']
+const DEFAULT_ORDER = ['hello.wa', 'count.wa', 'heart.wa', 'brainfuck.wa', 'closure.wa', 'iface.wa', 'map.wa', 'defer.wa', 'complex.wa', 'iter.wa', 'hello-zh.wz']
+const VALID_EXTENSIONS = [...new Set(DEFAULT_ORDER.map(file => path.extname(file)))]
 const EXAMPLES_DIR = path.resolve(__dirname, '../examples')
 const OUTPUT_PATH = path.resolve(__dirname, '../public/examples.json')
 
@@ -27,9 +27,8 @@ function loadExamples(): IExample[] {
 
       if (VALID_EXTENSIONS.includes(extension)) {
         try {
-          const name = path.basename(file, extension)
           const code = fs.readFileSync(filePath, 'utf-8')
-          examples.push({ name, code })
+          examples.push({ name: file, code })
         }
         catch (err) {
           console.error(`Error reading file ${file}:`, err)
@@ -57,13 +56,8 @@ function main(): void {
   const examples = loadExamples()
   const sortedExamples = sortExamples(examples)
 
-  const finalExamples = sortedExamples.map(({ name, code }) => ({
-    name,
-    code,
-  }))
-
   try {
-    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(finalExamples, null, 2))
+    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(sortedExamples, null, 2))
     console.log('Successfully generated examples.json')
   }
   catch (err) {
