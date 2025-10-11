@@ -10,7 +10,7 @@ interface IExample {
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const DEFAULT_ORDER = ['hello.wa', 'count.wa', 'heart.wa', 'brainfuck.wa', 'closure.wa', 'iface.wa', 'map.wa', 'defer.wa', 'complex.wa', 'iter.wa', 'hello-zh.wz']
+const DEFAULT_ORDER = ['hello.wz', 'hello.wa', 'count.wa', 'heart.wa', 'brainfuck.wa', 'closure.wa', 'iface.wa', 'map.wa', 'defer.wa', 'complex.wa', 'iter.wa']
 const VALID_EXTENSIONS = [...new Set(DEFAULT_ORDER.map(file => path.extname(file)))]
 const EXAMPLES_DIR = path.resolve(__dirname, '../examples')
 const OUTPUT_PATH = path.resolve(__dirname, '../public/examples.json')

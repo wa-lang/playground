@@ -1,5 +1,9 @@
 [
   {
+    "name": "hello.wz",
+    "code": "注: 版权 @2019 凹语言 作者。保留所有权利。\n\n引入 \"书\"\n\n函数 主控:\n    书·说(\"你好，凹语言中文版！\")\n完毕\n"
+  },
+  {
     "name": "hello.wa",
     "code": "// 版权 @2019 凹语言 作者。保留所有权利。\n\nimport \"fmt\"\nimport \"runtime\"\n\nfunc main {\n\tprintln(\"你好，凹语言！\", runtime.WAOS)\n\tprintln(add(40, 2))\n\n\tfmt.Println(1 + 1)\n}\n\nfunc add(a: i32, b: i32) => i32 {\n\treturn a + b\n}\n"
   },
@@ -38,9 +42,5 @@
   {
     "name": "iter.wa",
     "code": "type MyObject :struct {\n\telems: []string\n}\n\nfunc New(a: ...string) => *MyObject {\n\treturn &MyObject{elems: a}\n}\n\nfunc MyObject.Iter => func => (ok: bool, k: int, v: string) {\n\tidx: int\n\treturn func => (ok: bool, k: int, v: string) {\n\t\tif ok = idx < len(this.elems); ok {\n\t\t\tk, v = idx, this.elems[idx]\n\t\t\tidx++\n\t\t}\n\t\treturn\n\t}\n}\n\nfunc main {\n\tfor i, v := range New(\"aa\", \"bb\", \"cc\").Iter() {\n\t\tprintln(i, v)\n\t}\n}\n"
-  },
-  {
-    "name": "hello-zh.wz",
-    "code": "注: 版权 @2025 _examples/hello-zh 作者。保留所有权利。\n\n引入 \"书\"\n\n函数 主控:\n    书·说(\"你好，凹语言中文版！\")\n完毕\n"
   }
 ]
