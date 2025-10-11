@@ -44,6 +44,7 @@ export function EditorPane() {
 
   useEffect(() => {
     window.__WA_CODE__ = current?.code || ''
+    window.__WA_FILE_NAME__ = current?.name || ''
     handleRunCode()
   }, [current])
 

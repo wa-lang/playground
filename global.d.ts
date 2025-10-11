@@ -9,6 +9,7 @@ declare global {
     __WA_WASM__: ArrayBuffer
     __WA_WAT__: string
     __WA_CODE__: string
+    __WA_FILE_NAME__: string
     __WA_PRINT__: string
     __WA_ERROR__: string
     __WA_FMT_CODE__: string
