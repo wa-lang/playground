@@ -143,7 +143,7 @@
               }
             },
             {
-              "match": "\\b(函数)\\s+([_a-zA-Z][_a-zA-Z0-9]*)\\b",
+              "match": "(函数)\\s+([\\u4e00-\\u9fa5][\\u4e00-\\u9fa50-9]*)",
               "captures": {
                 "1": {
                   "name": "storage.type.function.wz"
@@ -182,7 +182,7 @@
               "name": "entity.name.type.wz"
             },
             {
-              "match": "([_a-zA-Z][_a-zA-Z0-9]*)(?=\\s*\\()",
+              "match": "([\\u4e00-\\u9fa5][\\u4e00-\\u9fa50-9]*)(?=\\s*\\()",
               "name": "entity.name.function.wz"
             }
           ]
@@ -203,7 +203,7 @@
               "name": "entity.name.type.wz"
             },
             {
-              "match": "\\b[_a-zA-Z][_a-zA-Z0-9]*\\b",
+              "match": "[\\u4e00-\\u9fa5][\\u4e00-\\u9fa50-9]*",
               "name": "variable.wz"
             }
           ]

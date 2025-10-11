@@ -1,4 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
 export const LANG_KEYWORDS = [
   'break',
   'defer',
@@ -20,7 +19,9 @@ export const LANG_KEYWORDS = [
   'if',
   'return',
   'make',
+]
 
+export const LANG_KEYWORDS_ZH = [
   '跳出',
   '押后',
   '引入',
@@ -78,7 +79,9 @@ export const LANG_TYPES = [
   'complex128',
   'c64',
   'c128',
+]
 
+export const LANG_TYPES_ZH = [
   '布尔',
   '字串',
   '错误',
@@ -100,6 +103,8 @@ export const LANG_TYPES = [
 ]
 
 export const LANG_BOOL = ['true', 'false']
+
+export const LANG_BOOL_ZH = ['真', '假']
 
 export const LANG_SNIPPETS = [
   {
@@ -206,5 +211,103 @@ export const LANG_SNIPPETS = [
     label: 'f',
     insertText: 'func ${1:name}($2) $3 {\n\t$0\n}',
     detail: 'Snippet for function declaration',
+  },
+]
+
+export const LANG_SNIPPETS_ZH = [
+  {
+    label: '引',
+    insertText: '引入 "${1:包}"',
+    detail: '引入语句片段',
+  },
+  {
+    label: '引入',
+    insertText: '引入 (\n\t${1:包}\n)',
+    detail: '引入块片段',
+  },
+  {
+    label: '常',
+    insertText: '常量 ${1:名称} = ${2:值}',
+    detail: '常量片段',
+  },
+  {
+    label: '常量',
+    insertText: '常量 (\n\t${1:名称} = ${2:值}\n)',
+    detail: '常量块片段',
+  },
+  {
+    label: '类函',
+    insertText: '类型 ${1:名称} 函数($3) $4',
+    detail: '类型函数声明片段',
+  },
+  {
+    label: '类接',
+    insertText: '类型 ${1:名称} 接口 {\n\t$0\n}',
+    detail: '类型接口片段',
+  },
+  {
+    label: '类结',
+    insertText: '类型 ${1:名称} 结构 {\n\t$0\n}',
+    detail: '结构声明片段',
+  },
+  {
+    label: '如',
+    insertText: '如果 ${1:条件} {\n\t$0\n}',
+    detail: '如果语句片段',
+  },
+  {
+    label: '如否',
+    insertText: '如果 ${1:条件} {\n\t$0\n} 否则 {\n\t$0\n}',
+    detail: '如果否则语句片段',
+  },
+  {
+    label: '循',
+    insertText: '循环 ${1:i} := ${2:0}; $1 < ${3:计数}; $1${4:++} {\n\t$0\n}',
+    detail: '循环语句片段',
+  },
+  {
+    label: '循迭',
+    insertText: '循环 ${1:_, }${2:值} := 迭代 ${3:集合} {\n\t$0\n}',
+    detail: '循环迭代语句片段',
+  },
+  {
+    label: '找',
+    insertText: '找辙 ${1:表达式} {\n\t$0\n}',
+    detail: '找辙语句片段',
+  },
+  {
+    label: '找有',
+    insertText: '找辙 ${1:表达式} {\n有辙 ${2:条件}:\n\t$0\n}',
+    detail: '找辙有辙语句片段',
+  },
+  {
+    label: '找没',
+    insertText: '找辙 ${1:表达式} {\n没辙:\n\t$0\n}',
+    detail: '找辙没辙语句片段',
+  },
+  {
+    label: '押',
+    insertText: '押后 ${1:函数}()',
+    detail: '押后语句片段',
+  },
+  {
+    label: '返',
+    insertText: '返回 ${1:值}',
+    detail: '返回语句片段',
+  },
+  {
+    label: '跳',
+    insertText: '跳出',
+    detail: '跳出语句片段',
+  },
+  {
+    label: '继',
+    insertText: '继续',
+    detail: '继续语句片段',
+  },
+  {
+    label: '函',
+    insertText: '函数 ${1:名称}($2) $3 {\n\t$0\n}',
+    detail: '函数声明片段',
   },
 ]
