@@ -1,0 +1,313 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Wa/中文",
+  "scopeName": "source.wz",
+  "fileTypes": ["wz"],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#support"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.storage.wz",
+          "match": "\\b(跳出|押后|引入|结构|有辙|否则|或则|接口|找辙|常量|循环|字典|类型|继续|函数|迭代|没辙|全局|如果|返回|完毕)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "comment": "Types",
+          "name": "storage.type.wz",
+          "match": "\\b(布尔|字串|错误|字典|我的|约塔)\\b"
+        },
+        {
+          "comment": "Singed Ints",
+          "name": "storage.name.type.wz",
+          "match": "\\b(整型|微整型|短整型|普整型|长整型|符文)\\b"
+        },
+        {
+          "comment": "Unsigned Ints",
+          "name": "storage.name.type.wz",
+          "match": "\\b(正整|微正整|短正整|普正整|长正整|针型|字节)\\b"
+        },
+        {
+          "comment": "Floats",
+          "name": "storage.name.type.wz",
+          "match": "\\b(单精|双精)\\b"
+        },
+        {
+          "comment": "Complex",
+          "name": "storage.name.type.wz",
+          "match": "\\b(单复|双复)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.wz",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "include": "#stringcontent"
+            }
+          ]
+        },
+        {
+          "name": "string.multiline.wz",
+          "begin": "\\\\\\\\",
+          "end": "$"
+        },
+        {
+          "name": "string.quoted.single.wz",
+          "match": "'([^'\\\\]|\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.))'"
+        }
+      ]
+    },
+    "stringcontent": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.wz",
+          "match": "\\\\([nrt'\"\\\\]|(x[0-9a-fA-F]{2})|(u\\{[0-9a-fA-F]+\\}))"
+        },
+        {
+          "name": "invalid.illegal.unrecognized-string-escape.wz",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.float.wz",
+          "match": "\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?([eE][+-]?[0-9_]+)?\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.wz",
+          "match": "\\b[0-9][0-9_]*\\b"
+        },
+        {
+          "name": "constant.numeric.hexadecimal.wz",
+          "match": "\\b0x[a-fA-F0-9_]+\\b"
+        },
+        {
+          "name": "constant.numeric.octal.wz",
+          "match": "\\b0o[0-7_]+\\b"
+        },
+        {
+          "name": "constant.numeric.binary.wz",
+          "match": "\\b0b[01_]+\\b"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "meta.function.declaration.wz",
+          "patterns": [
+            {
+              "match": "\\b(func)\\s+([A-Z][a-zA-Z0-9]*)\\b",
+              "captures": {
+                "1": {
+                  "name": "storage.type.function.wz"
+                },
+                "2": {
+                  "name": "entity.name.type.wz"
+                }
+              }
+            },
+            {
+              "match": "\\b(函数)\\s+([_a-zA-Z][_a-zA-Z0-9]*)\\b",
+              "captures": {
+                "1": {
+                  "name": "storage.type.function.wz"
+                },
+                "2": {
+                  "name": "entity.name.function.wz"
+                }
+              }
+            },
+            {
+              "begin": "\\b(函数)\\s+",
+              "end": "\"",
+              "name": "entity.name.function.wz",
+              "beginCaptures": {
+                "1": {
+                  "name": "storage.type.function.wz"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#stringcontent"
+                }
+              ]
+            },
+            {
+              "name": "keyword.default.wz",
+              "match": "\\b(常数|函数)\\b"
+            }
+          ]
+        },
+        {
+          "name": "meta.function.call.wz",
+          "patterns": [
+            {
+              "match": "([A-Z][a-zA-Z0-9]*)(?=\\s*\\()",
+              "name": "entity.name.type.wz"
+            },
+            {
+              "match": "([_a-zA-Z][_a-zA-Z0-9]*)(?=\\s*\\()",
+              "name": "entity.name.function.wz"
+            }
+          ]
+        },
+        {
+          "name": "meta.variable.wz",
+          "patterns": [
+            {
+              "match": "\\b[_A-Z][_A-Z0-9]+\\b",
+              "name": "variable.constant.wz"
+            },
+            {
+              "match": "\\b[_a-zA-Z][_a-zA-Z0-9]*_t\\b",
+              "name": "entity.name.type.wz"
+            },
+            {
+              "match": "\\b[A-Z][a-zA-Z0-9]*\\b",
+              "name": "entity.name.type.wz"
+            },
+            {
+              "match": "\\b[_a-zA-Z][_a-zA-Z0-9]*\\b",
+              "name": "variable.wz"
+            }
+          ]
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.wz",
+          "match": "(==|!=|<=|>=|<|>)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.wz",
+          "match": "((\\+|-|\\*|/|\\%)=?)|(\\+\\+|--)"
+        },
+        {
+          "name": "keyword.operator.logical.wz",
+          "match": "(\\!|\\&\\&|\\|\\|)"
+        },
+        {
+          "name": "keyword.operator.assignment.wz",
+          "match": "(\\:\\=|\\=)"
+        },
+        {
+          "name": "keyword.operator.bitwise.wz",
+          "match": "((<<|>>|&|&\\^|\\^|\\|)=?)"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.hash.wz",
+          "begin": "#",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.wz"
+            }
+          },
+          "end": "$"
+        },
+        {
+          "name": "comment.line.zh1.wz",
+          "begin": "注:",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.wz"
+            }
+          },
+          "end": "$"
+        },
+        {
+          "name": "comment.line.zh2.wz",
+          "begin": "注：",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.wz"
+            }
+          },
+          "end": "$"
+        },
+        {
+          "name": "comment.line.double-slash.wz",
+          "begin": "//",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.wz"
+            }
+          },
+          "end": "$"
+        },
+        {
+          "name": "comment.block.documentation.wz",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.begin.wz"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.end.wz"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#comments"
+            }
+          ]
+        }
+      ]
+    },
+    "commentContents": {
+      "patterns": [
+        {
+          "match": "\\b(TODO|FIXME|NOTE|INFO|IDEA|CHANGED|BUG|HACK)\\b:?",
+          "name": "keyword.todo.wz"
+        }
+      ]
+    },
+    "support": {
+      "patterns": []
+    }
+  }
+}
