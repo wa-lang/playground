@@ -43,7 +43,7 @@
         {
           "comment": "Types",
           "name": "storage.type.wz",
-          "match": "\\b(布尔|字串|错误|字典|我的|约塔)\\b"
+          "match": "\\b(布尔|字串|错误|字典|我的|嘀嗒)\\b"
         },
         {
           "comment": "Singed Ints",
@@ -53,7 +53,7 @@
         {
           "comment": "Unsigned Ints",
           "name": "storage.name.type.wz",
-          "match": "\\b(正整|微正整|短正整|普正整|长正整|针型|字节)\\b"
+          "match": "\\b(正整|微正整|短正整|普正整|长正整|地址型|字节)\\b"
         },
         {
           "comment": "Floats",
