@@ -43,7 +43,7 @@
         {
           "comment": "Types",
           "name": "storage.type.wz",
-          "match": "\\b(布尔|字串|错误|字典|我的|嘀嗒)\\b"
+          "match": "\\b(布尔|字串|错误|字典|嘀嗒|皮囊|我的)\\b"
         },
         {
           "comment": "Singed Ints",
