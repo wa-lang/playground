@@ -5,7 +5,7 @@ import { importsObject } from './import-obj'
 type TWasmInst = WebAssembly.Instance & {
   exports: {
     '_start': () => void
-    '__main__.main': () => void
+    '_main': () => void
   }
 }
 
@@ -56,7 +56,7 @@ export async function runWa() {
     const wasmInst = await WebAssembly.instantiate(module, importsObject) as TWasmInst
     window.__WA_APP__.init(wasmInst)
     wasmInst.exports._start()
-    wasmInst.exports['__main__.main']()
+    wasmInst.exports['_main']()
     useWasmStore.getState().actions.updateOutput(window.__WA_PRINT__)
     useWasmStore.getState().actions.updateWat(window.__WA_WAT__)
   }
